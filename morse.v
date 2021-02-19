@@ -39,7 +39,7 @@
 
 `timescale 1 ps / 1 ps
 
-module morse ();
+module tb_m3_for_arty ();
 
     // Define input clock
     localparam CLK_PERIOD_12M  = 83334;
@@ -164,6 +164,7 @@ module morse ();
         repeat (SHORT_WAIT2)   @(posedge clk_sys) begin end;
         push_buttons_SRL <= 8'h0;
         repeat (SHORT_WAIT1)   @(posedge clk_sys) begin end;
+        //repeat (20000)   @(posedge clk_sys) begin end;
         push_buttons_SRL <= 8'h1;
         repeat (SHORT_WAIT2)   @(posedge clk_sys) begin end;
         push_buttons_SRL <= 8'h0;
@@ -427,5 +428,4 @@ module morse ();
 
 `endif
 
-endmodule : morse
-
+endmodule : tb_m3_for_arty
