@@ -1,0 +1,227 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Tool Versions:</h2>
+IDE-Version: µVision V5.33.0.0
+Copyright (C) 2020 ARM Ltd and ARM Germany GmbH. All rights reserved.
+License Information: federico megler, politecnico di milano, LIC=----
+ 
+Tool Versions:
+Toolchain:       MDK-Lite  Version: 5.33.0.0
+Toolchain Path:  C:\Keil_v5\ARM\ARMCC\Bin
+C Compiler:      Armcc.exe V5.06 update 7 (build 960)
+Assembler:       Armasm.exe V5.06 update 7 (build 960)
+Linker/Locator:  ArmLink.exe V5.06 update 7 (build 960)
+Library Manager: ArmAr.exe V5.06 update 7 (build 960)
+Hex Converter:   FromElf.exe V5.06 update 7 (build 960)
+CPU DLL:         SARMCM3.DLL V5.33.0.0
+Dialog DLL:      DCM.DLL V1.17.3.0
+Target DLL:      UL2CM3.DLL V1.163.9.0
+Dialog DLL:      TCM.DLL V1.48.0.0
+ 
+<h2>Project:</h2>
+V:\software\m3_for_arty_a7\Build_Keil\m3_for_arty_a7.uvprojx
+Project File Date:  02/21/2021
+
+<h2>Output:</h2>
+*** Using Compiler 'V5.06 update 7 (build 960)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
+Rebuild target 'm3_for_arty_a7'
+assembling startup_ARTY_CM3.s...
+compiling outbyte.c...
+..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\include\xil_assert.h(195): warning:  #1-D: last line of file ends without a newline
+  */
+..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\libsrc\standalone_v6_7\src\outbyte.c: 1 warning, 0 errors
+compiling system_ARTY_CM3.c...
+compiling print.c...
+compiling xil_assert.c...
+..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\libsrc\standalone_v6_7\src\xil_assert.h(195): warning:  #1-D: last line of file ends without a newline
+  */
+..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\libsrc\standalone_v6_7\src\xil_assert.c: 1 warning, 0 errors
+assembling atomic_asm.s...
+compiling atomic.c...
+compiling main.c...
+..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\include\xil_assert.h(195): warning:  #1-D: last line of file ends without a newline
+  */
+..\gpio\gpio.h(26): warning:  #1295-D: Deprecated declaration blink - give arg types
+  void blink();
+..\gpio\gpio.h(27): warning:  #1295-D: Deprecated declaration getButton - give arg types
+  uint32_t getButton();
+..\gpio\gpio.h(31): warning:  #1295-D: Deprecated declaration shortDelay - give arg types
+  void shortDelay();
+..\gpio\gpio.h(32): warning:  #1295-D: Deprecated declaration mediumDelay - give arg types
+  void mediumDelay();
+..\gpio\gpio.h(33): warning:  #1295-D: Deprecated declaration longDelay - give arg types
+  void longDelay();
+..\gpio\gpio.h(46): warning:  #1-D: last line of file ends without a newline
+  #define QSPI_QSPIMODE 0x01                                              // QSPI controller mode
+..\main\main.c(47): warning:  #550-D: variable "status"  was set but never used
+      int     status;
+..\main\main.c(49): warning:  #177-D: variable "i"  was declared but never referenced
+      int     i;
+..\main\main.c(50): warning:  #177-D: variable "readbackError"  was declared but never referenced
+      int     readbackError;
+..\main\main.c(51): warning:  #177-D: variable "debugStr"  was declared but never referenced
+      char    debugStr[256];
+..\main\main.c(52): warning:  #177-D: variable "aaaa"  was declared but never referenced
+  		int aaaa = 1;
+..\main\main.c(60): warning:  #177-D: variable "dtcmTest"  was declared but never referenced
+      uint32_t dtcmTest;
+..\main\main.c(65): warning:  #177-D: variable "pBRAMmemory"  was declared but never referenced
+      volatile u32 *pBRAMmemory = (u32 *)XPAR_BRAM_0_BASEADDR;
+..\main\main.c(68): warning:  #177-D: variable "pCPUId"  was declared but never referenced
+      volatile u32 *pCPUId = (u32 *)0xE000ED00;
+..\main\main.c(71): warning:  #177-D: variable "CPU_part"  was declared but never referenced
+      int          CPU_part;
+..\main\main.c(72): warning:  #177-D: variable "CPU_rev"  was declared but never referenced
+      int          CPU_rev;
+..\main\main.c(73): warning:  #177-D: variable "CPU_var"  was declared but never referenced
+      int          CPU_var;
+..\main\main.c(74): warning:  #177-D: variable "CPU_name"  was declared but never referenced
+      char         CPU_name[20];
+..\main\main.c(85): warning:  #177-D: variable "spi_tx_data"  was declared but never referenced
+      u8 spi_tx_data[8] = {0x01,0x23,0x45,0x67,0x89,0xab,0xcd,0xef};
+..\main\main.c(86): warning:  #177-D: variable "spi_rx_data"  was declared but never referenced
+      u8 spi_rx_data[8] = {0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff};
+..\main\main.c(89): warning:  #177-D: variable "bram_data"  was declared but never referenced
+      u32 bram_data[8] = {0x01234567, 0x89abcdef, 0xdeadbeef, 0xfeebdaed, 0xa5f03ca5, 0x87654321, 0xfedc0ba9, 0x01020408};
+..\main\main.c(366): warning:  #1-D: last line of file ends without a newline
+  }
+..\main\main.c: 23 warnings, 0 errors
+compiling gpio.c...
+..\gpio\gpio.h(26): warning:  #1295-D: Deprecated declaration blink - give arg types
+  void blink();
+..\gpio\gpio.h(27): warning:  #1295-D: Deprecated declaration getButton - give arg types
+  uint32_t getButton();
+..\gpio\gpio.h(31): warning:  #1295-D: Deprecated declaration shortDelay - give arg types
+  void shortDelay();
+..\gpio\gpio.h(32): warning:  #1295-D: Deprecated declaration mediumDelay - give arg types
+  void mediumDelay();
+..\gpio\gpio.h(33): warning:  #1295-D: Deprecated declaration longDelay - give arg types
+  void longDelay();
+..\gpio\gpio.h(46): warning:  #1-D: last line of file ends without a newline
+  #define QSPI_QSPIMODE 0x01                                              // QSPI controller mode
+..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\include\xil_assert.h(195): warning:  #1-D: last line of file ends without a newline
+  */
+..\gpio\gpio.c: 7 warnings, 0 errors
+compiling spi.c...
+..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\include\xil_assert.h(195): warning:  #1-D: last line of file ends without a newline
+  */
+..\spi\spi.c: 1 warning, 0 errors
+compiling xgpio.c...
+..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\include\xil_assert.h(195): warning:  #1-D: last line of file ends without a newline
+  */
+..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\libsrc\gpio_v4_4\src\xgpio.c: 1 warning, 0 errors
+compiling uart.c...
+..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\include\xil_assert.h(195): warning:  #1-D: last line of file ends without a newline
+  */
+..\uart\uart.c: 1 warning, 0 errors
+compiling xgpio_extra.c...
+..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\include\xil_assert.h(195): warning:  #1-D: last line of file ends without a newline
+  */
+..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\libsrc\gpio_v4_4\src\xgpio_extra.c: 1 warning, 0 errors
+compiling xgpio_g.c...
+..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\include\xil_assert.h(195): warning:  #1-D: last line of file ends without a newline
+  */
+..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\libsrc\gpio_v4_4\src\xgpio_g.c: 1 warning, 0 errors
+compiling xgpio_intr.c...
+..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\include\xil_assert.h(195): warning:  #1-D: last line of file ends without a newline
+  */
+..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\libsrc\gpio_v4_4\src\xgpio_intr.c: 1 warning, 0 errors
+compiling xgpio_selftest.c...
+..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\include\xil_assert.h(195): warning:  #1-D: last line of file ends without a newline
+  */
+..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\libsrc\gpio_v4_4\src\xgpio_selftest.c: 1 warning, 0 errors
+compiling xgpio_sinit.c...
+..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\include\xil_assert.h(195): warning:  #1-D: last line of file ends without a newline
+  */
+..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\libsrc\gpio_v4_4\src\xgpio_sinit.c: 1 warning, 0 errors
+compiling xspi_g.c...
+..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\include\xil_assert.h(195): warning:  #1-D: last line of file ends without a newline
+  */
+..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\libsrc\spi_v4_4\src\xspi_g.c: 1 warning, 0 errors
+compiling xspi.c...
+..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\include\xil_assert.h(195): warning:  #1-D: last line of file ends without a newline
+  */
+..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\libsrc\spi_v4_4\src\xspi.c: 1 warning, 0 errors
+compiling xspi_options.c...
+..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\include\xil_assert.h(195): warning:  #1-D: last line of file ends without a newline
+  */
+..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\libsrc\spi_v4_4\src\xspi_options.c: 1 warning, 0 errors
+compiling xspi_stats.c...
+..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\include\xil_assert.h(195): warning:  #1-D: last line of file ends without a newline
+  */
+..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\libsrc\spi_v4_4\src\xspi_stats.c: 1 warning, 0 errors
+compiling xspi_sinit.c...
+..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\include\xil_assert.h(195): warning:  #1-D: last line of file ends without a newline
+  */
+..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\libsrc\spi_v4_4\src\xspi_sinit.c: 1 warning, 0 errors
+compiling xspi_selftest.c...
+..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\include\xil_assert.h(195): warning:  #1-D: last line of file ends without a newline
+  */
+..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\libsrc\spi_v4_4\src\xspi_selftest.c: 1 warning, 0 errors
+compiling xuartlite_g.c...
+..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\include\xil_assert.h(195): warning:  #1-D: last line of file ends without a newline
+  */
+..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\libsrc\uartlite_v3_2\src\xuartlite_g.c: 1 warning, 0 errors
+compiling xuartlite_intr.c...
+..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\include\xil_assert.h(195): warning:  #1-D: last line of file ends without a newline
+  */
+..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\libsrc\uartlite_v3_2\src\xuartlite_intr.c: 1 warning, 0 errors
+compiling xuartlite.c...
+..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\include\xil_assert.h(195): warning:  #1-D: last line of file ends without a newline
+  */
+..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\libsrc\uartlite_v3_2\src\xuartlite.c: 1 warning, 0 errors
+compiling xuartlite_l.c...
+..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\include\xil_assert.h(195): warning:  #1-D: last line of file ends without a newline
+  */
+..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\libsrc\uartlite_v3_2\src\xuartlite_l.c: 1 warning, 0 errors
+compiling xuartlite_selftest.c...
+..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\include\xil_assert.h(195): warning:  #1-D: last line of file ends without a newline
+  */
+..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\libsrc\uartlite_v3_2\src\xuartlite_selftest.c: 1 warning, 0 errors
+compiling xuartlite_sinit.c...
+..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\include\xil_assert.h(195): warning:  #1-D: last line of file ends without a newline
+  */
+..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\libsrc\uartlite_v3_2\src\xuartlite_sinit.c: 1 warning, 0 errors
+compiling xuartlite_stats.c...
+..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\include\xil_assert.h(195): warning:  #1-D: last line of file ends without a newline
+  */
+..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\libsrc\uartlite_v3_2\src\xuartlite_stats.c: 1 warning, 0 errors
+linking...
+Program Size: Code=9060 RO-data=1008 RW-data=204 ZI-data=5436  
+FromELF: creating hex file...
+After Build - User command #1: make_hex_a7.bat
+V:\software\m3_for_arty_a7\Build_Keil>call fromelf --vhx --32x1 --output bram_a7.hex objects\m3_for_arty_a7.axf 
+V:\software\m3_for_arty_a7\Build_Keil>copy  objects\m3_for_arty_a7.axf bram_a7.elf 
+        1 file copiati.
+V:\software\m3_for_arty_a7\Build_Keil>call fromelf --vhx --8x1  --output qspi_a7.hex objects\m3_for_arty_a7.axf 
+V:\software\m3_for_arty_a7\Build_Keil>call fromelf --bin        --output qspi_a7.bin objects\m3_for_arty_a7.axf 
+V:\software\m3_for_arty_a7\Build_Keil>copy bram_a7.* ..\..\..\hardware\m3_for_arty_a7\m3_for_arty_a7 
+bram_a7.elf
+bram_a7.hex
+        2 file copiati.
+V:\software\m3_for_arty_a7\Build_Keil>copy qspi_a7.hex ..\..\..\hardware\m3_for_arty_a7\testbench 
+        1 file copiati.
+".\objects\m3_for_arty_a7.axf" - 0 Error(s), 53 Warning(s).
+
+<h2>Software Packages used:</h2>
+
+Package Vendor: ARM
+                http://www.keil.com/pack/ARM.CMSIS.5.7.0.pack
+                ARM.CMSIS.5.7.0
+                CMSIS (Cortex Microcontroller Software Interface Standard)
+   * Component: CORE Version: 5.4.0
+
+<h2>Collection of Component include folders:</h2>
+  .\RTE\_m3_for_arty_a7
+  C:\Users\federico.megler\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include
+  C:\Users\federico.megler\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\Device\ARM\ARMCM3\Include
+
+<h2>Collection of Component Files used:</h2>
+
+   * Component: ARM::CMSIS:CORE:5.4.0
+Build Time Elapsed:  00:00:03
+</pre>
+</body>
+</html>

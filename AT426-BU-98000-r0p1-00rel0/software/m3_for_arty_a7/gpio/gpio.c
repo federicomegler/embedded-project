@@ -189,3 +189,60 @@ void IncLeds( void )
     XGpio_DiscreteWrite(&Gpio_Led_DIPSw, ARTY_A7_LED_CHANNEL, (gpio_dip_switches+1));   // Set LEDs
     
 }
+
+void blink(){
+		int i = 0;
+    XGpio_DiscreteWrite(&Gpio_Led_DIPSw, ARTY_A7_LED_CHANNEL, 0x1);
+    for(i=0; i<100; ++i);
+    XGpio_DiscreteWrite(&Gpio_Led_DIPSw, ARTY_A7_LED_CHANNEL, 0x0);
+		for(i=0; i<100; ++i);
+}
+
+
+void longDelay(){
+	int i = 0;
+	for(i=0; i < 120; i++);
+}
+void mediumDelay(){
+	int i = 0;
+	for(i=0; i < 60; i++);
+}
+void shortDelay(){
+	int i = 0;
+	for(i=0; i < 20; i++);
+}
+
+uint32_t buttonCheck(uint32_t lastButton){
+	uint32_t buttonStates;
+	buttonStates = XGpio_DiscreteRead(&Gpio_RGBLed_PB, ARTY_A7_PB_CHANNEL);
+	if(buttonStates != lastButton){
+		switch(buttonStates)
+		{
+			case 0x01: // short signal
+					XGpio_DiscreteWrite(&Gpio_Led_DIPSw, ARTY_A7_LED_CHANNEL, 0x01);
+					shortDelay();
+					XGpio_DiscreteWrite(&Gpio_Led_DIPSw, ARTY_A7_LED_CHANNEL, 0x00);
+					//print("short");
+					//mediumDelay();
+			break;
+			case 0x02: // long signal
+					XGpio_DiscreteWrite(&Gpio_Led_DIPSw, ARTY_A7_LED_CHANNEL, 0x01);
+					mediumDelay();
+					XGpio_DiscreteWrite(&Gpio_Led_DIPSw, ARTY_A7_LED_CHANNEL, 0x00);
+				  //print("-");
+					//shortDelay();
+			break;
+			case 0x04: // letter end
+					longDelay();
+			break;
+			case 0x08: // word end
+				longDelay();
+				longDelay();
+			break;
+				default:
+					shortDelay();
+				break;
+			}
+	}	
+	return buttonStates; 
+}

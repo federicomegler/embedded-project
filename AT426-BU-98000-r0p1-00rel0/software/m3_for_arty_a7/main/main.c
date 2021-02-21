@@ -49,6 +49,8 @@ int main (void)
     int     i;
     int     readbackError;
     char    debugStr[256];
+		int aaaa = 1;
+		uint32_t lastButton;
     
     // Illegal location
     volatile u32 emptyLoc;
@@ -94,10 +96,10 @@ int main (void)
     
     // Initialise the GPIO
     status = InitialiseGPIO();
-    if (status != XST_SUCCESS)  {
+ /*   if (status != XST_SUCCESS)  {
         print("Error - Xilinx GPIO failed to initialise\n");
     }
-
+*/
     // Enable GPIO Interrupts
     NVIC_EnableIRQ(GPIO0_IRQn);
     NVIC_EnableIRQ(GPIO1_IRQn);
@@ -115,10 +117,10 @@ int main (void)
 
     // Initialise the SPI
     status = InitialiseSPI(DAPLinkFittedn);
-    if (status != XST_SUCCESS)  {
+  /*  if (status != XST_SUCCESS)  {
         print("Error - Xilinx SPI controllers failed to initialise\n");
     }
-
+*/
     DisableSPIInterrupts();
 
 
@@ -132,7 +134,7 @@ int main (void)
     // Note however that code is compiled for a specific processor, so even though
     // the processor can be auto-detected, if the compiled code has extended commands not
     // supported by the processor, then runtime issues can occur
-    CPUId    = *pCPUId;
+ /*   CPUId    = *pCPUId;
     CPU_var  = ((CPUId & 0x00F00000) >> 20);
     CPU_part = ((CPUId & 0x0000FFF0) >> 4);
     CPU_rev  = CPUId & (0x0000000F);
@@ -145,8 +147,8 @@ int main (void)
     }
     
     sprintf (debugStr, "Arm %s Revision %i Variant %i\r\n\n", CPU_name, CPU_rev, CPU_var );
-    
-#ifndef SIM_BUILD    
+    */
+/*#ifndef SIM_BUILD    
     // Use Xilinx version print command
     print ("************************************\r\n");
     print ( debugStr );
@@ -161,7 +163,7 @@ int main (void)
 #else
     print ( debugStr );
 #endif    
-
+*/
         // *****************************
         // Test the code memory aliasing
         // *****************************
@@ -171,166 +173,179 @@ int main (void)
 
         // DAPLINK fitted: (Low QSPI, High BRAM)
         // DAPLINK absent: (Low BRAM, High BRAM)
-        status = 0;
+//        status = 0;
 
-        if(*(uint32_t*)0x0000001c != 0x55){
-          status += 1;
-           }
-        if(*(uint32_t*)0x1000001c != 0x55){
-          status += 2;
-          }
+//        if(*(uint32_t*)0x0000001c != 0x55){
+//          status += 1;
+//           }
+//        if(*(uint32_t*)0x1000001c != 0x55){
+//          status += 2;
+//          }
 
-        // Write to ITCM upper alias
-        *(uint32_t*)0x1000001c = 12;
+//        // Write to ITCM upper alias
+//        *(uint32_t*)0x1000001c = 12;
 
-        if(DAPLinkFittedn){
-        //Lower alias should have changed
-          if(*(uint32_t*)0x0000001c != 12){
-            status += 4;
-            }
-            // Write to ITCM lower alias
-          *(uint32_t*)0x0000001c = 11;
-          if(*(uint32_t*)0x0000001c != 11){
-            status += 4;
-            }
-          if(*(uint32_t*)0x1000001c != 11){
-            status += 8;
-            }
-          } else {
-          if(*(uint32_t*)0x0000001c != 0x55){
-            status += 4;
-            }
-          if(*(uint32_t*)0x1000001c != 12){
-            status += 8;
-            }
-          }
-
-
-          if (status == 3){
-            print("Upper and lower regions written since BRAM initialised\r\n");
-                                                status = 0;
-            }
-                                        if (status == 2){
-            print("Upper alias writen since BRAM initialised\r\n");
-                                                status = 0;
-                                        }                   
-          if (status == 4 && (*(uint32_t*)0x0000001c == 12)){
-            print("ITCM also aliased high\r\n");
-                                          status = 0;
-            }
-                                        if(status != 0){
-          print("Unexpected alias behaviour");
-          // 1: QSPI content unexpected
-          // 2: ITCM content unexpected (maybe written by download)
-          // 4: Lower alias overwritten or wrong
-          // 8: ITCM Upper alias not changed
-          sprintf(debugStr, " %d\r\n", status);
-          print(debugStr);
-         } else {
-           print ("Aliasing OK\r\n");
-           }
-    // *****************************************************
-    // Test the BRAM
-    // *****************************************************
-    
-    // Write to BRAM
-    for( i=0; i< (sizeof(bram_data)/sizeof(u32)); i++)
-        *pBRAMmemory++ = bram_data[i];
-    readbackError = 0;
-    // Reset the pointer
-    pBRAMmemory = (u32 *)XPAR_BRAM_0_BASEADDR;
-
-    // Readback
-    for( i=0; i< (sizeof(bram_data)/sizeof(u32)); i++)
-    {
-      if ( *pBRAMmemory++ != bram_data[i] )
-        readbackError++;
-      }
-
-    if ( readbackError )
-        print( "ERROR - Bram readback corrupted.\r\n" );
-    else
-        print( "Bram readback correct\r\n" );
+//        if(DAPLinkFittedn){
+//        //Lower alias should have changed
+//          if(*(uint32_t*)0x0000001c != 12){
+//            status += 4;
+//            }
+//            // Write to ITCM lower alias
+//          *(uint32_t*)0x0000001c = 11;
+//          if(*(uint32_t*)0x0000001c != 11){
+//            status += 4;
+//            }
+//          if(*(uint32_t*)0x1000001c != 11){
+//            status += 8;
+//            }
+//          } else {
+//          if(*(uint32_t*)0x0000001c != 0x55){
+//            status += 4;
+//            }
+//          if(*(uint32_t*)0x1000001c != 12){
+//            status += 8;
+//            }
+//          }
 
 
-    // *****************************************************
-    // Test the SPI
-    // *****************************************************
-    
-    // Initialise the base QSPI to the correct mode
-    status = InitQSPIBaseFlash();
-    status = WriteQSPIBaseFlash( spi_tx_data, sizeof(spi_tx_data)/sizeof(u8), 0x0 );
-    status = ReadQSPIBaseFlash ( spi_rx_data, sizeof(spi_rx_data)/sizeof(u8), 0x0 );
+//          if (status == 3){
+//            print("Upper and lower regions written since BRAM initialised\r\n");
+//                                                status = 0;
+//            }
+//                                        if (status == 2){
+//            print("Upper alias writen since BRAM initialised\r\n");
+//                                                status = 0;
+//                                        }                   
+//          if (status == 4 && (*(uint32_t*)0x0000001c == 12)){
+//            print("ITCM also aliased high\r\n");
+//                                          status = 0;
+//            }
+//                                        if(status != 0){
+//          print("Unexpected alias behaviour");
+//          // 1: QSPI content unexpected
+//          // 2: ITCM content unexpected (maybe written by download)
+//          // 4: Lower alias overwritten or wrong
+//          // 8: ITCM Upper alias not changed
+//          sprintf(debugStr, " %d\r\n", status);
+//          print(debugStr);
+//         } else {
+//           print ("Aliasing OK\r\n");
+//           }
+//    // *****************************************************
+//    // Test the BRAM
+//    // *****************************************************
+//    
+//    // Write to BRAM
+//    for( i=0; i< (sizeof(bram_data)/sizeof(u32)); i++)
+//        *pBRAMmemory++ = bram_data[i];
+//    readbackError = 0;
+//    // Reset the pointer
+//    pBRAMmemory = (u32 *)XPAR_BRAM_0_BASEADDR;
+
+//    // Readback
+//    for( i=0; i< (sizeof(bram_data)/sizeof(u32)); i++)
+//    {
+//      if ( *pBRAMmemory++ != bram_data[i] )
+//        readbackError++;
+//      }
+
+//    if ( readbackError )
+//        print( "ERROR - Bram readback corrupted.\r\n" );
+//    else
+//        print( "Bram readback correct\r\n" );
 
 
-    // Manually type out, print does work when called back to back from a loop
-/*
-    sprintf( debugStr, "%x %x %x %x %x %x %x %x\r\n", spi_rx_data[0], spi_rx_data[1], spi_rx_data[2], spi_rx_data[3], 
-                                                   spi_rx_data[4], spi_rx_data[5], spi_rx_data[6], spi_rx_data[7] );
-    print( debugStr );
-*/    
-    // Compare buffers
-    readbackError = 0;
-    for( i=0; i<(sizeof(spi_rx_data)/sizeof(u8)); i++ )
-    {
-        if( spi_rx_data[i] != spi_tx_data[i] )
-            readbackError++;
-    }
+//    // *****************************************************
+//    // Test the SPI
+//    // *****************************************************
+//    
+//    // Initialise the base QSPI to the correct mode
+//    status = InitQSPIBaseFlash();
+//    status = WriteQSPIBaseFlash( spi_tx_data, sizeof(spi_tx_data)/sizeof(u8), 0x0 );
+//    status = ReadQSPIBaseFlash ( spi_rx_data, sizeof(spi_rx_data)/sizeof(u8), 0x0 );
 
-    if ( readbackError )
-        print( "ERROR - Base SPI readback corrupted.\r\n" );
-    else
-        print( "Base SPI readback correct\r\n" );
-   
 
-    // ******************************************************
-    // Test exceptions.  Write to legal and illegal addresses
-    // ******************************************************
-/*    
-    // Do an access to an legal location
-    emptyLoc = *pLegalAddr;
+//    // Manually type out, print does work when called back to back from a loop
+///*
+//    sprintf( debugStr, "%x %x %x %x %x %x %x %x\r\n", spi_rx_data[0], spi_rx_data[1], spi_rx_data[2], spi_rx_data[3], 
+//                                                   spi_rx_data[4], spi_rx_data[5], spi_rx_data[6], spi_rx_data[7] );
+//    print( debugStr );
+//*/    
+//    // Compare buffers
+//    readbackError = 0;
+//    for( i=0; i<(sizeof(spi_rx_data)/sizeof(u8)); i++ )
+//    {
+//        if( spi_rx_data[i] != spi_tx_data[i] )
+//            readbackError++;
+//    }
 
-    // Do an access to an illegal location
-    emptyLoc = *pIllegalAddr;
+//    if ( readbackError )
+//        print( "ERROR - Base SPI readback corrupted.\r\n" );
+//    else
+//        print( "Base SPI readback correct\r\n" );
+//   
 
-*/
-   // ******************************************************
-   // Test exclusive transactions
-   // ******************************************************
-   
-   // Data TCM supports exclusive access
-   status = atomic_access(&dtcmTest,0x12341230);
-   if (status == 1) {
-   print( "STREX DTCM failed unexpectedly\r\n");
-   }
-   // Instruction TCM supports exclusive access (ARTY connected)
-   status = atomic_access((uint32_t*)0x10001000,0x12341231);
-   if (status == 1) {
-   print( "STREX ITCM high alias failed unexpectedly\r\n");
-   }
-   // Instruction QSPI region, no exclusive monitor
-   // Unused vector table entry after Usage fault handler
-   status = atomic_access((uint32_t*)0x0000001c,0x12341232);
-   if (status == 1 && DAPLinkFittedn) {
-   print( "STREX ITCM low alias failed unexpectedly\r\n");
-   }
-   if (status == 0 && !DAPLinkFittedn) {
-   print( "STREX QSPI success (unexpected)\r\n");
-   }               
-   // BRAM region is external, no exclusive monitor
-   status = atomic_access((uint32_t*)XPAR_BRAM_0_BASEADDR,0x12341233);
-   if (status == 0 && !DAPLinkFittedn) {
-   print( "STREX BRAM success (unexpected)\r\n");
-   }
-   print( "Atomic transaction test completed\r\n" );
-   
+//    // ******************************************************
+//    // Test exceptions.  Write to legal and illegal addresses
+//    // ******************************************************
+///*    
+//    // Do an access to an legal location
+//    emptyLoc = *pLegalAddr;
+
+//    // Do an access to an illegal location
+//    emptyLoc = *pIllegalAddr;
+
+//*/
+//   // ******************************************************
+//   // Test exclusive transactions
+//   // ******************************************************
+//   
+//   // Data TCM supports exclusive access
+//   status = atomic_access(&dtcmTest,0x12341230);
+//   if (status == 1) {
+//   print( "STREX DTCM failed unexpectedly\r\n");
+//   }
+//   // Instruction TCM supports exclusive access (ARTY connected)
+//   status = atomic_access((uint32_t*)0x10001000,0x12341231);
+//   if (status == 1) {
+//   print( "STREX ITCM high alias failed unexpectedly\r\n");
+//   }
+//   // Instruction QSPI region, no exclusive monitor
+//   // Unused vector table entry after Usage fault handler
+//   status = atomic_access((uint32_t*)0x0000001c,0x12341232);
+//   if (status == 1 && DAPLinkFittedn) {
+//   print( "STREX ITCM low alias failed unexpectedly\r\n");
+//   }
+//   if (status == 0 && !DAPLinkFittedn) {
+//   print( "STREX QSPI success (unexpected)\r\n");
+//   }               
+//   // BRAM region is external, no exclusive monitor
+//   status = atomic_access((uint32_t*)XPAR_BRAM_0_BASEADDR,0x12341233);
+//   if (status == 0 && !DAPLinkFittedn) {
+//   print( "STREX BRAM success (unexpected)\r\n");
+//   }
+//   print( "Atomic transaction test completed\r\n" );
+//   
 
    // print( "Startup complete, entering main interrupt loop\r\n" );
 
 
     // Main loop.  Handle LEDs and switches via interrupt
-    while ( 1 )
+		blink();
+    blink();
+		//print ("ciao");
+		while ( 1 )
     {
+			
+			//if(aaaa){
+			
+			lastButton = buttonCheck(lastButton);
+			blink();
+			//blink();
+			//blink();
+			//aaaa = 0;
+			//}
+			//print ("ciao");
         /* Main loop. Wait for interrupts to occur */
         /*
         if ( CheckUARTRxBytes() != 0 )

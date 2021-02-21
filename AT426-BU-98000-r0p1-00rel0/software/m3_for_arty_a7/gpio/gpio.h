@@ -23,7 +23,14 @@ int InitialiseGPIO( void );
 void EnableGPIOInterrupts( void );
 void IncLeds( void );
 void SetDAPLinkQSPIMode( u32 mode );
+void blink();
+uint32_t getButton();
+void disableButton(int number);
 
+uint32_t buttonCheck(uint32_t lastButton);
+void shortDelay();
+void mediumDelay();
+void longDelay();
 // void GPIO0_Handler ( void );
 // void GPIO1_Handler ( void );
 
@@ -37,4 +44,3 @@ void SetDAPLinkQSPIMode( u32 mode );
 // GPIO register control
 #define QSPI_XIPMODE  0x00                                              // XIP controller mode
 #define QSPI_QSPIMODE 0x01                                              // QSPI controller mode
-
