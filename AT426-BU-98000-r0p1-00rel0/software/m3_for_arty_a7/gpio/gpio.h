@@ -23,7 +23,7 @@ int InitialiseGPIO( void );
 void EnableGPIOInterrupts( void );
 void IncLeds( void );
 void SetDAPLinkQSPIMode( u32 mode );
-void blink();
+void blink(int led);
 uint32_t getButton();
 void disableButton(int number);
 
@@ -31,6 +31,7 @@ uint32_t buttonCheck(uint32_t lastButton);
 void shortDelay();
 void mediumDelay();
 void longDelay();
+void codingMorse(char *b);
 // void GPIO0_Handler ( void );
 // void GPIO1_Handler ( void );
 

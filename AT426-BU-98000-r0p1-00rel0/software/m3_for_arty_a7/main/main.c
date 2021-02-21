@@ -331,27 +331,10 @@ int main (void)
 
 
     // Main loop.  Handle LEDs and switches via interrupt
-		blink();
-    blink();
-		//print ("ciao");
+		
 		while ( 1 )
     {
-			
-			//if(aaaa){
-			
 			lastButton = buttonCheck(lastButton);
-			blink();
-			//blink();
-			//blink();
-			//aaaa = 0;
-			//}
-			//print ("ciao");
-        /* Main loop. Wait for interrupts to occur */
-        /*
-        if ( CheckUARTRxBytes() != 0 )
-            print ("x");
-        */
-    
     }
 }
 

@@ -23,6 +23,7 @@
 #include "xparameters.h"        // Project memory and device map
 #include "xgpio.h"              // Xilinx GPIO routines
 #include "peripherallink.h"     // IRQ definitions
+#include <string.h>
 
 /************************** Variable Definitions **************************/
 /*
@@ -35,6 +36,13 @@
 static XGpio Gpio_Led_DIPSw;   /* The driver instance for GPIO Device 0 */
 static XGpio Gpio_RGBLed_PB;   /* The driver instance for GPIO Device 1 */
 static XGpio Gpio_DAPLink;     /* The driver instance for the DAPLink GPIO */
+
+//Global Variables
+
+char word[20] = "";
+char character[5] = "";
+
+
 
 /*****************************************************************************/
 
@@ -190,9 +198,9 @@ void IncLeds( void )
     
 }
 
-void blink(){
+void blink(int led){
 		int i = 0;
-    XGpio_DiscreteWrite(&Gpio_Led_DIPSw, ARTY_A7_LED_CHANNEL, 0x1);
+    XGpio_DiscreteWrite(&Gpio_Led_DIPSw, ARTY_A7_LED_CHANNEL, led);
     for(i=0; i<100; ++i);
     XGpio_DiscreteWrite(&Gpio_Led_DIPSw, ARTY_A7_LED_CHANNEL, 0x0);
 		for(i=0; i<100; ++i);
@@ -214,7 +222,9 @@ void shortDelay(){
 
 uint32_t buttonCheck(uint32_t lastButton){
 	uint32_t buttonStates;
+	int i = 0;
 	buttonStates = XGpio_DiscreteRead(&Gpio_RGBLed_PB, ARTY_A7_PB_CHANNEL);
+	
 	if(buttonStates != lastButton){
 		switch(buttonStates)
 		{
@@ -222,6 +232,8 @@ uint32_t buttonCheck(uint32_t lastButton){
 					XGpio_DiscreteWrite(&Gpio_Led_DIPSw, ARTY_A7_LED_CHANNEL, 0x01);
 					shortDelay();
 					XGpio_DiscreteWrite(&Gpio_Led_DIPSw, ARTY_A7_LED_CHANNEL, 0x00);
+					character[i] = 's';
+					++i;
 					//print("short");
 					//mediumDelay();
 			break;
@@ -229,15 +241,23 @@ uint32_t buttonCheck(uint32_t lastButton){
 					XGpio_DiscreteWrite(&Gpio_Led_DIPSw, ARTY_A7_LED_CHANNEL, 0x01);
 					mediumDelay();
 					XGpio_DiscreteWrite(&Gpio_Led_DIPSw, ARTY_A7_LED_CHANNEL, 0x00);
+					character[i] = 'l';
+					++i;
 				  //print("-");
 					//shortDelay();
 			break;
 			case 0x04: // letter end
 					longDelay();
+					codingMorse(character);
+					for(i=0; i<strlen(character); ++i){
+						character[i] = '\0';
+					}
+					i=0;
 			break;
 			case 0x08: // word end
 				longDelay();
 				longDelay();
+				print(word);
 			break;
 				default:
 					shortDelay();
@@ -245,4 +265,224 @@ uint32_t buttonCheck(uint32_t lastButton){
 			}
 	}	
 	return buttonStates; 
+}
+
+
+void codingMorse(char *b){
+
+if(b[0]=='s')
+{
+ if(b[1]=='s'){
+  
+    if(b[2]=='s'){
+     
+      if(b[3]=='s'){        
+        if(b[4]=='s'){         
+         word[strlen(word)] = '5';      
+        }
+        else if(b[4]=='l'){
+         word[strlen(word)] = '4'; 
+        }
+        else word[strlen(word)] = 'h';        
+      }
+      else if(b[3]=='l'){
+       if(b[4]=='s'){         
+         blink(4); //error
+        }
+        else if(b[4]=='l'){
+         word[strlen(word)] = '3'; 
+        }
+        else word[strlen(word)] = 'v';  
+      }
+      else word[strlen(word)] = 's'; 
+       
+   }
+   else if(b[2]=='l'){ //ssl
+    
+    if(b[3]=='s'){        
+        if(b[4]=='s'){         
+         blink(4); //error      
+        }
+        else if(b[4]=='l'){
+         blink(4); //error
+        }
+        else word[strlen(word)] = 'f';        
+      }
+      else if(b[3]=='l'){ //ssll
+       if(b[4]=='s'){         
+         blink(4); //error
+        }
+        else if(b[4]=='l'){
+         word[strlen(word)] = '2'; 
+        }
+        else blink(4); 
+      }
+      else word[strlen(word)] = 'u'; 
+    
+   }
+   else word[strlen(word)] = 'i'; 
+  
+ }
+ 
+ else if(b[1]=='l'){ 
+  
+    if(b[2]=='s'){ 
+     
+      if(b[3]=='s'){       
+        if(b[4]=='s'){        
+         blink(4);      
+        }
+        else if(b[4]=='l'){
+         blink(4);
+        }
+        else word[strlen(word)] = 'l';       
+      }
+      else if(b[3]=='l'){ 
+       if(b[4]=='s'){         
+         blink(4); //error
+        }
+        else if(b[4]=='l'){
+         blink(4);
+        }
+        else blink(4); 
+      }
+      else word[strlen(word)] = 'r'; 
+       
+   }
+   else if(b[2]=='l'){ 
+    
+    if(b[3]=='s'){      
+        if(b[4]=='s'){         
+         blink(4); //error      
+        }
+        else if(b[4]=='l'){
+         blink(4); //error
+        }
+        else word[strlen(word)] = 'p';        
+      }
+      else if(b[3]=='l'){ 
+       if(b[4]=='s'){         
+         blink(4); //error
+        }
+        else if(b[4]=='l'){
+         word[strlen(word)] = 'l'; 
+        }
+        else word[strlen(word)] = 'j'; 
+      }
+      else word[strlen(word)] = 'w'; 
+    
+   }
+   else word[strlen(word)] = 'a'; 
+  
+ }
+ else word[strlen(word)] = 'e'; 
+}
+else if(b[0]=='l'){
+ 
+ if(b[1]=='s'){
+  
+    if(b[2]=='s'){
+     
+      if(b[3]=='s'){        
+        if(b[4]=='s'){         
+         word[strlen(word)] = '6';        
+        }
+        else if(b[4]=='l'){
+         blink(4);
+        }
+        else word[strlen(word)] = 'b';       
+      }
+      else if(b[3]=='l'){ 
+       if(b[4]=='s'){         
+         blink(4); //error
+        }
+        else if(b[4]=='l'){
+         blink(4);
+        }
+        else word[strlen(word)] = 'x'; 
+      }
+      else word[strlen(word)] = 'd'; 
+       
+   }
+   else if(b[2]=='l'){ //lsl
+    
+    if(b[3]=='s'){        
+        if(b[4]=='s'){         
+         blink(4); //error      
+        }
+        else if(b[4]=='l'){
+         blink(4); //error
+        }
+        else word[strlen(word)] = 'c';       
+      }
+      else if(b[3]=='l'){ // lsll
+       if(b[4]=='s'){         
+         blink(4); //error
+        }
+        else if(b[4]=='l'){
+         blink(4);
+        }
+        else word[strlen(word)] = 'y';  
+      }
+      else word[strlen(word)] = 'k'; 
+    
+   }
+   else word[strlen(word)] = 'n'; 
+  
+ }
+ 
+ else if(b[1]=='l'){ //l l 
+  
+    if(b[2]=='s'){ // l l s
+     
+      if(b[3]=='s'){ // llss   
+        if(b[4]=='s'){  //llsss      
+         word[strlen(word)] = '7';       
+        }
+        else if(b[4]=='l'){
+         blink(4);
+        }
+        word[strlen(word)] = 'z';        
+      }
+      else if(b[3]=='l'){ //l l s l
+       if(b[4]=='s'){         
+         blink(4); //error
+        }
+        else if(b[4]=='l'){
+         blink(4);
+        }
+        else word[strlen(word)] = 'q';  
+      }
+      else word[strlen(word)] = 'g'; 
+       
+   }
+   else if(b[2]=='l'){ // l l l
+    
+    if(b[3]=='s'){      
+        if(b[4]=='s'){         
+         word[strlen(word)] = '8';        
+        }
+        else if(b[4]=='l'){
+         blink(4); //error
+        }
+        else blink(4);       
+      }
+      else if(b[3]=='l'){ //llll
+       if(b[4]=='s'){         
+        word[strlen(word)] = '9';  //error
+        }
+else if(b[4]=='l'){
+         word[strlen(word)] = '0'; 
+        }
+        else blink(4); 
+      }
+      else word[strlen(word)] = 'o'; 
+    
+   }
+   else word[strlen(word)] = 'm'; 
+  
+ }
+ else word[strlen(word)] = 't'; 
+}
+else blink(4);
 }
