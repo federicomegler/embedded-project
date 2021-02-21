@@ -45,6 +45,7 @@ module tb_m3_for_arty ();
     localparam CLK_PERIOD_12M  = 83334;
     localparam CLK_PERIOD_100M = 10000;
     localparam CLK_PERIOD_1M   = 1000000;
+
 // Spartan version runs at 12MHz
 // Artix version runs at 100MHz    
 `ifdef ARTY_S7_TARGET
@@ -82,7 +83,7 @@ module tb_m3_for_arty ();
     wire        qspi_flash_io3_io;
     wire        qspi_flash_sck_io;
     wire        qspi_flash_ss_io;
-    
+
     
     always #(CLK_PERIOD_SYS/2)  clk_sys  <= ~clk_sys;
     always #(CLK_PERIOD_1M/2)   clk_1m   <= ~clk_1m;
@@ -101,20 +102,8 @@ module tb_m3_for_arty ();
             
     // Period of toggling switches needs to increase when running from QSPI
     // as execution is so much slower
-    localparam SHORT_WAIT025 = 250;
-    localparam SHORT_WAIT05 = 500;
-    localparam SHORT_WAIT1 = 1000;
-    localparam SHORT_WAIT2 = 2000;
-    localparam SHORT_WAIT3 = 3000;
-    localparam SHORT_WAIT4 = 4000;
-    localparam SHORT_WAIT5 = 5000;
-    localparam SHORT_WAIT6 = 60000;
-    localparam SHORT_WAIT7 = 7000;
-    localparam SHORT_WAIT8 = 8000;
-    localparam SHORT_WAIT9 = 9000;
-    localparam SHORT_WAIT10 = 10000;
 `ifdef INCLUDE_DAPLINK
-    localparam SW_TOGGLE_RATE = 55000;
+    localparam SW_TOGGLE_RATE = 40000;
 `else
     localparam SW_TOGGLE_RATE = 1000;
 `endif
@@ -125,7 +114,7 @@ module tb_m3_for_arty ();
     begin
         reset_n                  = 1'b0;
         nTRST                    = 1'b0;
-        push_buttons_SRL         = 8'h0;
+        push_buttons_SRL         = 8'h01;
         dip_switches_4bits_tri_i = 4'b0;
         
         // Baud rate clock is slowest, so ensure circuits reset by that properly
@@ -139,138 +128,29 @@ module tb_m3_for_arty ();
             repeat (50) @(posedge clk_sys) begin end;
         
         repeat (SW_TOGGLE_RATE) @(posedge clk_sys) begin end;
-        
-        /*
-        MORSE CODE
-        bits 0, 2, 4, 6 in push_buttons_SRL determine the values of 
-        push_buttons register (ex. SRL = '01010101' would mean that 
-        push_buttons[0:3] are all high = '1111')
-        
-        Each pushbutton corresponds to different MORSE CODE signal:
-        button 0 is letter_start, button 1 is short_signal, 
-        button 2 is long_signal, button 3 is word_start
-        
-        Beginning state of buttons is 0
-        */
-        
-        repeat (10)  @(posedge clk_sys) begin end;
-        push_buttons_SRL <= 8'h0;
-        repeat (1000)   @(posedge clk_sys) begin end;
-        push_buttons_SRL <= 8'h1;
-        repeat (SHORT_WAIT2)   @(posedge clk_sys) begin end;
-        push_buttons_SRL <= 8'h0;
-        repeat (SHORT_WAIT1)   @(posedge clk_sys) begin end;
-        push_buttons_SRL <= 8'h4;
-        repeat (SHORT_WAIT2)   @(posedge clk_sys) begin end;
-        push_buttons_SRL <= 8'h0;
-        repeat (SHORT_WAIT1)   @(posedge clk_sys) begin end;
-        //repeat (20000)   @(posedge clk_sys) begin end;
-        push_buttons_SRL <= 8'h1;
-        repeat (SHORT_WAIT2)   @(posedge clk_sys) begin end;
-        push_buttons_SRL <= 8'h0;
-        repeat (SHORT_WAIT1)   @(posedge clk_sys) begin end;
-        push_buttons_SRL <= 8'h10;
-        repeat (SHORT_WAIT2)   @(posedge clk_sys) begin end;
-        push_buttons_SRL <= 8'h0;
-        repeat (SHORT_WAIT1)   @(posedge clk_sys) begin end;
-        push_buttons_SRL <= 8'h4;
-        repeat (SHORT_WAIT2)   @(posedge clk_sys) begin end;
-        push_buttons_SRL <= 8'h0;
-        repeat (SHORT_WAIT1)   @(posedge clk_sys) begin end;
-        push_buttons_SRL <= 8'h4;
-        repeat (SHORT_WAIT2)   @(posedge clk_sys) begin end;
-        push_buttons_SRL <= 8'h0;
-        repeat (SHORT_WAIT1)   @(posedge clk_sys) begin end;
-        push_buttons_SRL <= 8'h4;
-        repeat (SHORT_WAIT2)   @(posedge clk_sys) begin end;
-        push_buttons_SRL <= 8'h0;
-        repeat (SHORT_WAIT1)   @(posedge clk_sys) begin end;
-        push_buttons_SRL <= 8'h10;
-        repeat (SHORT_WAIT2)   @(posedge clk_sys) begin end;
-        push_buttons_SRL <= 8'h0;
-        repeat (SHORT_WAIT1)   @(posedge clk_sys) begin end;
-        push_buttons_SRL <= 8'h4;
-        repeat (SHORT_WAIT2)   @(posedge clk_sys) begin end;
-        push_buttons_SRL <= 8'h0;
-        repeat (SHORT_WAIT1)   @(posedge clk_sys) begin end;
-        push_buttons_SRL <= 8'h1;
-        repeat (SHORT_WAIT2)   @(posedge clk_sys) begin end;
-        push_buttons_SRL <= 8'h0;
-        repeat (SHORT_WAIT1)   @(posedge clk_sys) begin end;
-        push_buttons_SRL <= 8'h1;
-        repeat (SHORT_WAIT2)   @(posedge clk_sys) begin end;
-        push_buttons_SRL <= 8'h0;
-        repeat (SHORT_WAIT1)   @(posedge clk_sys) begin end;
-        push_buttons_SRL <= 8'h1;
-        repeat (SHORT_WAIT2)   @(posedge clk_sys) begin end;
-        push_buttons_SRL <= 8'h0;
-        repeat (SHORT_WAIT1)   @(posedge clk_sys) begin end;
-        push_buttons_SRL <= 8'h10;
-        repeat (SHORT_WAIT2)   @(posedge clk_sys) begin end;
-        push_buttons_SRL <= 8'h0;
-        repeat (SHORT_WAIT1)   @(posedge clk_sys) begin end;
-        push_buttons_SRL <= 8'h1;
-        repeat (SHORT_WAIT2)   @(posedge clk_sys) begin end;
-        push_buttons_SRL <= 8'h0;
-        repeat (SHORT_WAIT1)   @(posedge clk_sys) begin end;
-        push_buttons_SRL <= 8'h10;
-        repeat (SHORT_WAIT2)   @(posedge clk_sys) begin end;
-        push_buttons_SRL <= 8'h0;
-        repeat (SHORT_WAIT1)   @(posedge clk_sys) begin end;
-        push_buttons_SRL <= 8'h1;
-        repeat (SHORT_WAIT2)   @(posedge clk_sys) begin end;
-        push_buttons_SRL <= 8'h0;
-        repeat (SHORT_WAIT1)   @(posedge clk_sys) begin end;
-        push_buttons_SRL <= 8'h4;
-        repeat (SHORT_WAIT2)   @(posedge clk_sys) begin end;
-        push_buttons_SRL <= 8'h0;
-        repeat (SHORT_WAIT1)   @(posedge clk_sys) begin end;
-        push_buttons_SRL <= 8'h1;
-        repeat (SHORT_WAIT2)   @(posedge clk_sys) begin end;
-        push_buttons_SRL <= 8'h0;
-        repeat (SHORT_WAIT1)   @(posedge clk_sys) begin end;
-        push_buttons_SRL <= 8'h10;
-        repeat (SHORT_WAIT2)   @(posedge clk_sys) begin end;
-        push_buttons_SRL <= 8'h0;
-        repeat (SHORT_WAIT1)   @(posedge clk_sys) begin end;
-        push_buttons_SRL <= 8'h4;
-        repeat (SHORT_WAIT2)   @(posedge clk_sys) begin end;
-        push_buttons_SRL <= 8'h0;
-        repeat (SHORT_WAIT1)   @(posedge clk_sys) begin end;
-        push_buttons_SRL <= 8'h40;
-        repeat (SHORT_WAIT2)   @(posedge clk_sys) begin end;
-        push_buttons_SRL <= 8'h0;
         // On each push of a button, tristate LED will change colour
         // For each DIP switch, respective single LED will light
-        
-      // MODIFIED
-      /*  repeat(20) begin
+        repeat(20) begin
             repeat (SW_TOGGLE_RATE) @(posedge clk_sys) begin end;
             push_buttons_SRL         = {push_buttons_SRL[6:0], push_buttons_SRL[7]};
             dip_switches_4bits_tri_i = dip_switches_4bits_tri_i + 1;
         end
-      */
-      // END MODIFIED
     end
 
     // LEDs are driven by tri-state.  Add pull-ups
-    // MODIFIED
-    /*
     pullup i_led_4bits_pu[3:0] (led_4bits_tri_io);
     pullup i_led_tri_pu[11:0]  (rgb_led_tri_io);
-    */
     
     // Create 100 cycle delayed loopback on UART
     // Default start-up value of uart_rx is 1'b1
     localparam UART_DELAY = 100;
     reg [UART_DELAY-1:0] uart_pipe = {UART_DELAY{1'b1}};
-    // MODIFIED
-    /*
+    
     always @(posedge clk_baud)
         uart_pipe <= {uart_pipe[UART_DELAY-2:0], uart_tx};
-       
+        
     assign uart_rx = uart_pipe[UART_DELAY-1];
-    */
+
     // To mirror the operation when the DAPLink is not fitted, pull the detect line high
     // To mimic daplink fitted, pull the line low
     // DAPLink also has it's own reset, drive this when fitted
@@ -295,8 +175,6 @@ module tb_m3_for_arty ();
         
     assign DAPLink_tri_o[13] = daplink_srstn;
     
-    // MODIFIED
-    /*
     // DAPLink supports SerialWire access, (SW).  Generate dummy inputs to ensure they propogate correctly.
     // Use 1MHz clock for SerialWire clock.
     assign DAPLink_tri_o[15] = clk_1m;
@@ -310,7 +188,6 @@ module tb_m3_for_arty ();
 
     // Pulse input low every 4th cycle
     assign DAPLink_tri_o[14] = ~(sw_di == 2'b11);
-   */
 `endif    
 
     // DAPLink signals are pulled up by the FPGA IO
