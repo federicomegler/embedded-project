@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\objects\m3_for_arty_a7.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\objects\m3_for_arty_a7.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060960: Last Updated: Sun Feb 21 19:13:43 2021
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060960: Last Updated: Mon Feb 22 22:50:43 2021
 <BR><P>
 <H3>Maximum Stack Usage =        136 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -544,7 +544,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[53]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;buttonCheck
 </UL>
 
-<P><STRONG><a name="[53]"></a>buttonCheck</STRONG> (Thumb, 170 bytes, Stack size 16 bytes, gpio.o(.text))
+<P><STRONG><a name="[53]"></a>buttonCheck</STRONG> (Thumb, 250 bytes, Stack size 16 bytes, gpio.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 72<LI>Call Chain = buttonCheck &rArr; codingMorse &rArr; blink &rArr; XGpio_DiscreteWrite &rArr; Xil_Assert
 </UL>
 <BR>[Calls]<UL><LI><a href="#[56]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;XGpio_DiscreteWrite
@@ -554,7 +554,6 @@ Global Symbols
 <LI><a href="#[62]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mediumDelay
 <LI><a href="#[63]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;longDelay
 <LI><a href="#[49]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;print
-<LI><a href="#[60]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strlen
 </UL>
 <BR>[Called By]<UL><LI><a href="#[41]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
@@ -1031,7 +1030,6 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = strlen
 </UL>
 <BR>[Called By]<UL><LI><a href="#[5f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;codingMorse
-<LI><a href="#[53]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;buttonCheck
 </UL>
 
 <P><STRONG><a name="[4a]"></a>__aeabi_memcpy4</STRONG> (Thumb, 0 bytes, Stack size 8 bytes, rt_memcpy_w.o(.text))

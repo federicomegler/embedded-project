@@ -41,7 +41,7 @@ static XGpio Gpio_DAPLink;     /* The driver instance for the DAPLink GPIO */
 
 char word[20] = "";
 char character[5] = "";
-
+int iterator=0;
 
 
 /*****************************************************************************/
@@ -222,7 +222,6 @@ void shortDelay(){
 
 uint32_t buttonCheck(uint32_t lastButton){
 	uint32_t buttonStates;
-	int i = 0;
 	buttonStates = XGpio_DiscreteRead(&Gpio_RGBLed_PB, ARTY_A7_PB_CHANNEL);
 	
 	if(buttonStates != lastButton){
@@ -232,8 +231,8 @@ uint32_t buttonCheck(uint32_t lastButton){
 					XGpio_DiscreteWrite(&Gpio_Led_DIPSw, ARTY_A7_LED_CHANNEL, 0x01);
 					shortDelay();
 					XGpio_DiscreteWrite(&Gpio_Led_DIPSw, ARTY_A7_LED_CHANNEL, 0x00);
-					character[i] = 's';
-					++i;
+					character[iterator] = 's';
+					++iterator;
 					//print("short");
 					//mediumDelay();
 			break;
@@ -241,22 +240,26 @@ uint32_t buttonCheck(uint32_t lastButton){
 					XGpio_DiscreteWrite(&Gpio_Led_DIPSw, ARTY_A7_LED_CHANNEL, 0x01);
 					mediumDelay();
 					XGpio_DiscreteWrite(&Gpio_Led_DIPSw, ARTY_A7_LED_CHANNEL, 0x00);
-					character[i] = 'l';
-					++i;
+					character[iterator] = 'l';
+					++iterator;
 				  //print("-");
 					//shortDelay();
 			break;
 			case 0x04: // letter end
+					XGpio_DiscreteWrite(&Gpio_Led_DIPSw, ARTY_A7_LED_CHANNEL, 0x04);
+					shortDelay();
+					XGpio_DiscreteWrite(&Gpio_Led_DIPSw, ARTY_A7_LED_CHANNEL, 0x00);
 					longDelay();
 					codingMorse(character);
-					for(i=0; i<strlen(character); ++i){
-						character[i] = '\0';
+					for(iterator=0; iterator<5; ++iterator){
+						character[iterator] = '\0';
 					}
-					i=0;
+					iterator=0;
 			break;
 			case 0x08: // word end
-				longDelay();
-				longDelay();
+				XGpio_DiscreteWrite(&Gpio_Led_DIPSw, ARTY_A7_LED_CHANNEL, 0x08);
+				shortDelay();
+				XGpio_DiscreteWrite(&Gpio_Led_DIPSw, ARTY_A7_LED_CHANNEL, 0x00);
 				print(word);
 			break;
 				default:
@@ -346,8 +349,7 @@ if(b[0]=='s')
         }
         else blink(4); 
       }
-      else word[strlen(word)] = 'r'; 
-       
+      else word[strlen(word)] = 'r';
    }
    else if(b[2]=='l'){ 
     
@@ -375,7 +377,7 @@ if(b[0]=='s')
    else word[strlen(word)] = 'a'; 
   
  }
- else word[strlen(word)] = 'e'; 
+ else word[strlen(word)] = 'e';
 }
 else if(b[0]=='l'){
  
@@ -479,7 +481,7 @@ else if(b[4]=='l'){
       else word[strlen(word)] = 'o'; 
     
    }
-   else word[strlen(word)] = 'm'; 
+   else word[strlen(word)] = 'm';
   
  }
  else word[strlen(word)] = 't'; 
