@@ -852,7 +852,7 @@ void decodingMorse(char *b){
 					else if(b[4]=='l'){
 					 blink(4);
 					}
-					word[strlen(word)] = 'z';        
+					else word[strlen(word)] = 'z';        
 				}
 				else if(b[3]=='l'){ //l l s l
 				 if(b[4]=='s'){         
