@@ -39,7 +39,7 @@ static XGpio Gpio_DAPLink;     /* The driver instance for the DAPLink GPIO */
 
 //Global Variables
 
-char word[20] = "";
+char word[200] = "";
 char encoded_sentence[200] = "";
 char character[5] = "";
 int iterator=0;
@@ -325,7 +325,370 @@ void encodingMorse(char *b){
 				encoded_sentence[internal_iterator] = ':';
 				internal_iterator++;
 				break;
-				
+			case 'f':
+				encoded_sentence[internal_iterator] = 's';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = 's';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = 'l';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = 's';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = ':';
+				internal_iterator++;
+				break;
+			case 'g':
+				encoded_sentence[internal_iterator] = 'l';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = 'l';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = 's';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = ':';
+				internal_iterator++;
+				break;
+			case 'h':
+				encoded_sentence[internal_iterator] = 's';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = 's';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = 's';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = 's';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = ':';
+				internal_iterator++;
+				break;
+			case 'i':
+				encoded_sentence[internal_iterator] = 's';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = 's';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = ':';
+				internal_iterator++;
+				break;
+			case 'j':
+				encoded_sentence[internal_iterator] = 's';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = 'l';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = 'l';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = 'l';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = ':';
+				internal_iterator++;
+				break;
+			case 'k':
+				encoded_sentence[internal_iterator] = 'l';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = 's';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = 'l';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = ':';
+				internal_iterator++;
+				break;
+			case 'l':
+				encoded_sentence[internal_iterator] = 's';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = 'l';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = 's';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = 's';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = ':';
+				internal_iterator++;
+				break;
+			case 'm':
+				encoded_sentence[internal_iterator] = 'l';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = 'l';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = ':';
+				internal_iterator++;
+				break;
+			case 'n':
+				encoded_sentence[internal_iterator] = 'l';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = 's';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = ':';
+				internal_iterator++;
+				break;
+			case 'o':
+				encoded_sentence[internal_iterator] = 'l';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = 'l';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = 'l';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = ':';
+				internal_iterator++;
+				break;
+			case 'p':
+				encoded_sentence[internal_iterator] = 's';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = 'l';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = 'l';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = 's';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = ':';
+				internal_iterator++;
+				break;
+			case 'q':
+				encoded_sentence[internal_iterator] = 'l';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = 'l';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = 's';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = 'l';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = ':';
+				internal_iterator++;
+				break;
+			case 'r':
+				encoded_sentence[internal_iterator] = 's';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = 'l';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = 's';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = ':';
+				internal_iterator++;
+				break;
+			case 's':
+				encoded_sentence[internal_iterator] = 's';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = 's';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = 's';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = ':';
+				internal_iterator++;
+				break;
+			case 't':
+				encoded_sentence[internal_iterator] = 'l';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = ':';
+				internal_iterator++;
+				break;
+			case 'u':
+				encoded_sentence[internal_iterator] = 's';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = 's';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = 'l';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = ':';
+				internal_iterator++;
+				break;
+			case 'v':
+				encoded_sentence[internal_iterator] = 's';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = 's';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = 's';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = 'l';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = ':';
+				internal_iterator++;
+				break;
+			case 'w':
+				encoded_sentence[internal_iterator] = 's';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = 'l';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = 'l';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = ':';
+				internal_iterator++;
+				break;
+			case 'x':
+				encoded_sentence[internal_iterator] = 'l';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = 's';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = 's';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = 'l';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = ':';
+				internal_iterator++;
+				break;
+			case 'y':
+				encoded_sentence[internal_iterator] = 'l';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = 's';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = 'l';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = 'l';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = ':';
+				internal_iterator++;
+				break;
+			case 'z':
+				encoded_sentence[internal_iterator] = 'l';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = 'l';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = 's';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = 's';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = ':';
+				internal_iterator++;
+				break;
+			case '0':
+				encoded_sentence[internal_iterator] = 'l';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = 'l';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = 'l';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = 'l';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = 'l';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = ':';
+				internal_iterator++;
+				break;
+			case '1':
+				encoded_sentence[internal_iterator] = 's';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = 'l';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = 'l';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = 'l';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = 'l';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = ':';
+				internal_iterator++;
+				break;
+			case '2':
+				encoded_sentence[internal_iterator] = 's';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = 's';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = 'l';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = 'l';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = 'l';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = ':';
+				internal_iterator++;
+				break;
+			case '3':
+				encoded_sentence[internal_iterator] = 's';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = 's';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = 's';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = 'l';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = 'l';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = ':';
+				internal_iterator++;
+				break;
+			case '4':
+				encoded_sentence[internal_iterator] = 's';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = 's';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = 's';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = 's';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = 'l';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = ':';
+				internal_iterator++;
+				break;
+			case '5':
+				encoded_sentence[internal_iterator] = 's';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = 's';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = 's';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = 's';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = 's';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = ':';
+				internal_iterator++;
+				break;
+			case '6':
+				encoded_sentence[internal_iterator] = 'l';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = 's';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = 's';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = 's';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = 's';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = ':';
+				internal_iterator++;
+				break;
+			case '7':
+				encoded_sentence[internal_iterator] = 'l';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = 'l';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = 's';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = 's';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = 's';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = ':';
+				internal_iterator++;
+				break;
+			case '8':
+				encoded_sentence[internal_iterator] = 'l';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = 'l';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = 'l';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = 's';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = 's';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = ':';
+				internal_iterator++;
+				break;
+			case '9':
+				encoded_sentence[internal_iterator] = 'l';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = 'l';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = 'l';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = 'l';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = 's';
+				internal_iterator++;
+				encoded_sentence[internal_iterator] = ':';
+				internal_iterator++;
+				break;
+			case ' ':
+				encoded_sentence[internal_iterator] = '_';
+				internal_iterator++;
+				break;
 		}
 	}
 }
