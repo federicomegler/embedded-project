@@ -778,7 +778,7 @@ void decodingMorse(char *b){
 					 blink(4); //error
 					}
 					else if(b[4]=='l'){
-					 word[strlen(word)] = 'l'; 
+					 word[strlen(word)] = '1'; 
 					}
 					else word[strlen(word)] = 'j'; 
 				}//sll
