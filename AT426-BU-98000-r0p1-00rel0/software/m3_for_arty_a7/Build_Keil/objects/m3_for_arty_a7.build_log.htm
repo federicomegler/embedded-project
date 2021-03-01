@@ -32,31 +32,34 @@ compiling outbyte.c...
 ..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\include\xil_assert.h(195): warning:  #1-D: last line of file ends without a newline
   */
 ..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\libsrc\standalone_v6_7\src\outbyte.c: 1 warning, 0 errors
-compiling print.c...
 compiling system_ARTY_CM3.c...
+compiling print.c...
 compiling xil_assert.c...
 ..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\libsrc\standalone_v6_7\src\xil_assert.h(195): warning:  #1-D: last line of file ends without a newline
   */
 ..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\libsrc\standalone_v6_7\src\xil_assert.c: 1 warning, 0 errors
 assembling atomic_asm.s...
+compiling atomic.c...
 compiling main.c...
 ..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\include\xil_assert.h(195): warning:  #1-D: last line of file ends without a newline
   */
 ..\gpio\gpio.h(27): warning:  #1295-D: Deprecated declaration getButton - give arg types
   uint32_t getButton();
-..\gpio\gpio.h(31): warning:  #1295-D: Deprecated declaration shortDelay - give arg types
+..\gpio\gpio.h(31): warning:  #1295-D: Deprecated declaration printEncodedMorse - give arg types
+  void printEncodedMorse();
+..\gpio\gpio.h(34): warning:  #1295-D: Deprecated declaration shortDelay - give arg types
   void shortDelay();
-..\gpio\gpio.h(32): warning:  #1295-D: Deprecated declaration mediumDelay - give arg types
+..\gpio\gpio.h(35): warning:  #1295-D: Deprecated declaration mediumDelay - give arg types
   void mediumDelay();
-..\gpio\gpio.h(33): warning:  #1295-D: Deprecated declaration longDelay - give arg types
+..\gpio\gpio.h(36): warning:  #1295-D: Deprecated declaration longDelay - give arg types
   void longDelay();
-..\gpio\gpio.h(35): warning:  #1295-D: Deprecated declaration timer - give arg types
+..\gpio\gpio.h(37): warning:  #1295-D: Deprecated declaration timer - give arg types
   void timer();
-..\gpio\gpio.h(36): warning:  #1295-D: Deprecated declaration nextCharacter - give arg types
+..\gpio\gpio.h(38): warning:  #1295-D: Deprecated declaration nextCharacter - give arg types
   void nextCharacter();
-..\gpio\gpio.h(37): warning:  #1295-D: Deprecated declaration printWord - give arg types
+..\gpio\gpio.h(39): warning:  #1295-D: Deprecated declaration printWord - give arg types
   void printWord();
-..\gpio\gpio.h(51): warning:  #1-D: last line of file ends without a newline
+..\gpio\gpio.h(54): warning:  #1-D: last line of file ends without a newline
   #define QSPI_QSPIMODE 0x01                                              // QSPI controller mode
 ..\main\main.c(47): warning:  #550-D: variable "status"  was set but never used
       int     status;
@@ -92,58 +95,59 @@ compiling main.c...
       u32 bram_data[8] = {0x01234567, 0x89abcdef, 0xdeadbeef, 0xfeebdaed, 0xa5f03ca5, 0x87654321, 0xfedc0ba9, 0x01020408};
 ..\main\main.c(349): warning:  #1-D: last line of file ends without a newline
   }
-..\main\main.c: 26 warnings, 0 errors
-compiling atomic.c...
+..\main\main.c: 27 warnings, 0 errors
 compiling gpio.c...
 ..\gpio\gpio.h(27): warning:  #1295-D: Deprecated declaration getButton - give arg types
   uint32_t getButton();
-..\gpio\gpio.h(31): warning:  #1295-D: Deprecated declaration shortDelay - give arg types
+..\gpio\gpio.h(31): warning:  #1295-D: Deprecated declaration printEncodedMorse - give arg types
+  void printEncodedMorse();
+..\gpio\gpio.h(34): warning:  #1295-D: Deprecated declaration shortDelay - give arg types
   void shortDelay();
-..\gpio\gpio.h(32): warning:  #1295-D: Deprecated declaration mediumDelay - give arg types
+..\gpio\gpio.h(35): warning:  #1295-D: Deprecated declaration mediumDelay - give arg types
   void mediumDelay();
-..\gpio\gpio.h(33): warning:  #1295-D: Deprecated declaration longDelay - give arg types
+..\gpio\gpio.h(36): warning:  #1295-D: Deprecated declaration longDelay - give arg types
   void longDelay();
-..\gpio\gpio.h(35): warning:  #1295-D: Deprecated declaration timer - give arg types
+..\gpio\gpio.h(37): warning:  #1295-D: Deprecated declaration timer - give arg types
   void timer();
-..\gpio\gpio.h(36): warning:  #1295-D: Deprecated declaration nextCharacter - give arg types
+..\gpio\gpio.h(38): warning:  #1295-D: Deprecated declaration nextCharacter - give arg types
   void nextCharacter();
-..\gpio\gpio.h(37): warning:  #1295-D: Deprecated declaration printWord - give arg types
+..\gpio\gpio.h(39): warning:  #1295-D: Deprecated declaration printWord - give arg types
   void printWord();
-..\gpio\gpio.h(51): warning:  #1-D: last line of file ends without a newline
+..\gpio\gpio.h(54): warning:  #1-D: last line of file ends without a newline
   #define QSPI_QSPIMODE 0x01                                              // QSPI controller mode
 ..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\include\xil_assert.h(195): warning:  #1-D: last line of file ends without a newline
   */
-..\gpio\gpio.c(533): warning:  #1-D: last line of file ends without a newline
-  }
-..\gpio\gpio.c: 10 warnings, 0 errors
-compiling xgpio.c...
-..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\include\xil_assert.h(195): warning:  #1-D: last line of file ends without a newline
-  */
-..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\libsrc\gpio_v4_4\src\xgpio.c: 1 warning, 0 errors
-compiling uart.c...
-..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\include\xil_assert.h(195): warning:  #1-D: last line of file ends without a newline
-  */
-..\uart\uart.c: 1 warning, 0 errors
+..\gpio\gpio.c(267): warning:  #177-D: variable "word"  was declared but never referenced
+  		char * word = "";
+..\gpio\gpio.c: 11 warnings, 0 errors
 compiling spi.c...
 ..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\include\xil_assert.h(195): warning:  #1-D: last line of file ends without a newline
   */
 ..\spi\spi.c: 1 warning, 0 errors
+compiling uart.c...
+..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\include\xil_assert.h(195): warning:  #1-D: last line of file ends without a newline
+  */
+..\uart\uart.c: 1 warning, 0 errors
 compiling xgpio_extra.c...
 ..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\include\xil_assert.h(195): warning:  #1-D: last line of file ends without a newline
   */
 ..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\libsrc\gpio_v4_4\src\xgpio_extra.c: 1 warning, 0 errors
+compiling xgpio.c...
+..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\include\xil_assert.h(195): warning:  #1-D: last line of file ends without a newline
+  */
+..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\libsrc\gpio_v4_4\src\xgpio.c: 1 warning, 0 errors
 compiling xgpio_g.c...
 ..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\include\xil_assert.h(195): warning:  #1-D: last line of file ends without a newline
   */
 ..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\libsrc\gpio_v4_4\src\xgpio_g.c: 1 warning, 0 errors
-compiling xgpio_intr.c...
-..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\include\xil_assert.h(195): warning:  #1-D: last line of file ends without a newline
-  */
-..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\libsrc\gpio_v4_4\src\xgpio_intr.c: 1 warning, 0 errors
 compiling xgpio_selftest.c...
 ..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\include\xil_assert.h(195): warning:  #1-D: last line of file ends without a newline
   */
 ..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\libsrc\gpio_v4_4\src\xgpio_selftest.c: 1 warning, 0 errors
+compiling xgpio_intr.c...
+..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\include\xil_assert.h(195): warning:  #1-D: last line of file ends without a newline
+  */
+..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\libsrc\gpio_v4_4\src\xgpio_intr.c: 1 warning, 0 errors
 compiling xgpio_sinit.c...
 ..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\include\xil_assert.h(195): warning:  #1-D: last line of file ends without a newline
   */
@@ -160,26 +164,26 @@ compiling xspi_options.c...
 ..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\include\xil_assert.h(195): warning:  #1-D: last line of file ends without a newline
   */
 ..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\libsrc\spi_v4_4\src\xspi_options.c: 1 warning, 0 errors
-compiling xspi_sinit.c...
-..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\include\xil_assert.h(195): warning:  #1-D: last line of file ends without a newline
-  */
-..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\libsrc\spi_v4_4\src\xspi_sinit.c: 1 warning, 0 errors
 compiling xspi_selftest.c...
 ..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\include\xil_assert.h(195): warning:  #1-D: last line of file ends without a newline
   */
 ..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\libsrc\spi_v4_4\src\xspi_selftest.c: 1 warning, 0 errors
+compiling xspi_sinit.c...
+..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\include\xil_assert.h(195): warning:  #1-D: last line of file ends without a newline
+  */
+..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\libsrc\spi_v4_4\src\xspi_sinit.c: 1 warning, 0 errors
 compiling xspi_stats.c...
 ..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\include\xil_assert.h(195): warning:  #1-D: last line of file ends without a newline
   */
 ..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\libsrc\spi_v4_4\src\xspi_stats.c: 1 warning, 0 errors
-compiling xuartlite_g.c...
-..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\include\xil_assert.h(195): warning:  #1-D: last line of file ends without a newline
-  */
-..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\libsrc\uartlite_v3_2\src\xuartlite_g.c: 1 warning, 0 errors
 compiling xuartlite.c...
 ..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\include\xil_assert.h(195): warning:  #1-D: last line of file ends without a newline
   */
 ..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\libsrc\uartlite_v3_2\src\xuartlite.c: 1 warning, 0 errors
+compiling xuartlite_g.c...
+..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\include\xil_assert.h(195): warning:  #1-D: last line of file ends without a newline
+  */
+..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\libsrc\uartlite_v3_2\src\xuartlite_g.c: 1 warning, 0 errors
 compiling xuartlite_intr.c...
 ..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\include\xil_assert.h(195): warning:  #1-D: last line of file ends without a newline
   */
@@ -201,7 +205,7 @@ compiling xuartlite_stats.c...
   */
 ..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\libsrc\uartlite_v3_2\src\xuartlite_stats.c: 1 warning, 0 errors
 linking...
-Program Size: Code=10660 RO-data=1008 RW-data=228 ZI-data=5452  
+Program Size: Code=12224 RO-data=1008 RW-data=228 ZI-data=6036  
 FromELF: creating hex file...
 After Build - User command #1: make_hex_a7.bat
 V:\software\m3_for_arty_a7\Build_Keil>call fromelf --vhx --32x1 --output bram_a7.hex objects\m3_for_arty_a7.axf 
@@ -215,7 +219,7 @@ bram_a7.hex
         2 file copiati.
 V:\software\m3_for_arty_a7\Build_Keil>copy qspi_a7.hex ..\..\..\hardware\m3_for_arty_a7\testbench 
         1 file copiati.
-".\objects\m3_for_arty_a7.axf" - 0 Error(s), 59 Warning(s).
+".\objects\m3_for_arty_a7.axf" - 0 Error(s), 61 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -233,7 +237,7 @@ Package Vendor: ARM
 <h2>Collection of Component Files used:</h2>
 
    * Component: ARM::CMSIS:CORE:5.4.0
-Build Time Elapsed:  00:00:04
+Build Time Elapsed:  00:00:03
 </pre>
 </body>
 </html>

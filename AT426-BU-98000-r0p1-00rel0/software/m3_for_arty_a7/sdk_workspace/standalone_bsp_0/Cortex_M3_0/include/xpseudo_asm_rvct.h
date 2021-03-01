@@ -91,37 +91,37 @@ extern "C" {
 
 /************************** Function Prototypes *****************************/
 
-__asm void cpsiei(void);
+//__asm void cpsiei(void);
 
-__asm void cpsidi(void);
+//__asm void cpsidi(void);
 
-__asm void cpsief(void);
+//__asm void cpsief(void);
 
-__asm void cpsidf(void);
+//__asm void cpsidf(void);
 
-/* memory synchronization operations */
+///* memory synchronization operations */
 
-/* Instruction Synchronization Barrier */
-__asm void isb(void);
+///* Instruction Synchronization Barrier */
+//__asm void isb(void);
 
-/* Data Synchronization Barrier */
-__asm void dsb(void);
+///* Data Synchronization Barrier */
+//__asm void dsb(void);
 
-/* Data Memory Barrier */
-__asm void dmb(void);
+///* Data Memory Barrier */
+//__asm void dmb(void);
 
-/* Memory Operations */
-__asm u32 ldr(u32 adr);
+///* Memory Operations */
+//__asm u32 ldr(u32 adr);
 
-__asm u32 ldrb(u32 adr);
+//__asm u32 ldrb(u32 adr);
 
-__asm void str(u32 adr, u32 val);
+//__asm void str(u32 adr, u32 val);
 
-__asm void strb(u32 adr, u32 val);
+//__asm void strb(u32 adr, u32 val);
 
-/* Count leading zeroes (clz) */
-__asm u32 clz(u32 arg);
-__asm u32 mfcpsr(void);
+///* Count leading zeroes (clz) */
+//__asm u32 clz(u32 arg);
+//__asm u32 mfcpsr(void);
 
 #ifdef __cplusplus
 }
