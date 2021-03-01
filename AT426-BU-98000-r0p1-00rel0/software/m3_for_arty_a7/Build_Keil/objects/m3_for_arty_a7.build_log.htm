@@ -39,7 +39,6 @@ compiling xil_assert.c...
   */
 ..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\libsrc\standalone_v6_7\src\xil_assert.c: 1 warning, 0 errors
 assembling atomic_asm.s...
-compiling atomic.c...
 compiling main.c...
 ..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\include\xil_assert.h(195): warning:  #1-D: last line of file ends without a newline
   */
@@ -51,7 +50,13 @@ compiling main.c...
   void mediumDelay();
 ..\gpio\gpio.h(33): warning:  #1295-D: Deprecated declaration longDelay - give arg types
   void longDelay();
-..\gpio\gpio.h(47): warning:  #1-D: last line of file ends without a newline
+..\gpio\gpio.h(35): warning:  #1295-D: Deprecated declaration timer - give arg types
+  void timer();
+..\gpio\gpio.h(36): warning:  #1295-D: Deprecated declaration nextCharacter - give arg types
+  void nextCharacter();
+..\gpio\gpio.h(37): warning:  #1295-D: Deprecated declaration printWord - give arg types
+  void printWord();
+..\gpio\gpio.h(51): warning:  #1-D: last line of file ends without a newline
   #define QSPI_QSPIMODE 0x01                                              // QSPI controller mode
 ..\main\main.c(47): warning:  #550-D: variable "status"  was set but never used
       int     status;
@@ -63,6 +68,8 @@ compiling main.c...
       char    debugStr[256];
 ..\main\main.c(52): warning:  #177-D: variable "aaaa"  was declared but never referenced
   		int aaaa = 1;
+..\main\main.c(53): warning:  #177-D: variable "lastButton"  was declared but never referenced
+  		uint32_t lastButton;
 ..\main\main.c(60): warning:  #177-D: variable "dtcmTest"  was declared but never referenced
       uint32_t dtcmTest;
 ..\main\main.c(65): warning:  #177-D: variable "pBRAMmemory"  was declared but never referenced
@@ -83,9 +90,10 @@ compiling main.c...
       u8 spi_rx_data[8] = {0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff};
 ..\main\main.c(89): warning:  #177-D: variable "bram_data"  was declared but never referenced
       u32 bram_data[8] = {0x01234567, 0x89abcdef, 0xdeadbeef, 0xfeebdaed, 0xa5f03ca5, 0x87654321, 0xfedc0ba9, 0x01020408};
-..\main\main.c(348): warning:  #1-D: last line of file ends without a newline
+..\main\main.c(349): warning:  #1-D: last line of file ends without a newline
   }
-..\main\main.c: 22 warnings, 0 errors
+..\main\main.c: 26 warnings, 0 errors
+compiling atomic.c...
 compiling gpio.c...
 ..\gpio\gpio.h(27): warning:  #1295-D: Deprecated declaration getButton - give arg types
   uint32_t getButton();
@@ -95,25 +103,31 @@ compiling gpio.c...
   void mediumDelay();
 ..\gpio\gpio.h(33): warning:  #1295-D: Deprecated declaration longDelay - give arg types
   void longDelay();
-..\gpio\gpio.h(47): warning:  #1-D: last line of file ends without a newline
+..\gpio\gpio.h(35): warning:  #1295-D: Deprecated declaration timer - give arg types
+  void timer();
+..\gpio\gpio.h(36): warning:  #1295-D: Deprecated declaration nextCharacter - give arg types
+  void nextCharacter();
+..\gpio\gpio.h(37): warning:  #1295-D: Deprecated declaration printWord - give arg types
+  void printWord();
+..\gpio\gpio.h(51): warning:  #1-D: last line of file ends without a newline
   #define QSPI_QSPIMODE 0x01                                              // QSPI controller mode
 ..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\include\xil_assert.h(195): warning:  #1-D: last line of file ends without a newline
   */
-..\gpio\gpio.c(490): warning:  #1-D: last line of file ends without a newline
+..\gpio\gpio.c(533): warning:  #1-D: last line of file ends without a newline
   }
-..\gpio\gpio.c: 7 warnings, 0 errors
-compiling spi.c...
-..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\include\xil_assert.h(195): warning:  #1-D: last line of file ends without a newline
-  */
-..\spi\spi.c: 1 warning, 0 errors
-compiling uart.c...
-..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\include\xil_assert.h(195): warning:  #1-D: last line of file ends without a newline
-  */
-..\uart\uart.c: 1 warning, 0 errors
+..\gpio\gpio.c: 10 warnings, 0 errors
 compiling xgpio.c...
 ..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\include\xil_assert.h(195): warning:  #1-D: last line of file ends without a newline
   */
 ..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\libsrc\gpio_v4_4\src\xgpio.c: 1 warning, 0 errors
+compiling uart.c...
+..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\include\xil_assert.h(195): warning:  #1-D: last line of file ends without a newline
+  */
+..\uart\uart.c: 1 warning, 0 errors
+compiling spi.c...
+..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\include\xil_assert.h(195): warning:  #1-D: last line of file ends without a newline
+  */
+..\spi\spi.c: 1 warning, 0 errors
 compiling xgpio_extra.c...
 ..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\include\xil_assert.h(195): warning:  #1-D: last line of file ends without a newline
   */
@@ -146,26 +160,26 @@ compiling xspi_options.c...
 ..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\include\xil_assert.h(195): warning:  #1-D: last line of file ends without a newline
   */
 ..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\libsrc\spi_v4_4\src\xspi_options.c: 1 warning, 0 errors
-compiling xspi_selftest.c...
-..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\include\xil_assert.h(195): warning:  #1-D: last line of file ends without a newline
-  */
-..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\libsrc\spi_v4_4\src\xspi_selftest.c: 1 warning, 0 errors
 compiling xspi_sinit.c...
 ..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\include\xil_assert.h(195): warning:  #1-D: last line of file ends without a newline
   */
 ..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\libsrc\spi_v4_4\src\xspi_sinit.c: 1 warning, 0 errors
+compiling xspi_selftest.c...
+..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\include\xil_assert.h(195): warning:  #1-D: last line of file ends without a newline
+  */
+..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\libsrc\spi_v4_4\src\xspi_selftest.c: 1 warning, 0 errors
 compiling xspi_stats.c...
 ..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\include\xil_assert.h(195): warning:  #1-D: last line of file ends without a newline
   */
 ..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\libsrc\spi_v4_4\src\xspi_stats.c: 1 warning, 0 errors
-compiling xuartlite.c...
-..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\include\xil_assert.h(195): warning:  #1-D: last line of file ends without a newline
-  */
-..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\libsrc\uartlite_v3_2\src\xuartlite.c: 1 warning, 0 errors
 compiling xuartlite_g.c...
 ..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\include\xil_assert.h(195): warning:  #1-D: last line of file ends without a newline
   */
 ..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\libsrc\uartlite_v3_2\src\xuartlite_g.c: 1 warning, 0 errors
+compiling xuartlite.c...
+..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\include\xil_assert.h(195): warning:  #1-D: last line of file ends without a newline
+  */
+..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\libsrc\uartlite_v3_2\src\xuartlite.c: 1 warning, 0 errors
 compiling xuartlite_intr.c...
 ..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\include\xil_assert.h(195): warning:  #1-D: last line of file ends without a newline
   */
@@ -187,7 +201,7 @@ compiling xuartlite_stats.c...
   */
 ..\sdk_workspace\standalone_bsp_0\Cortex_M3_0\libsrc\uartlite_v3_2\src\xuartlite_stats.c: 1 warning, 0 errors
 linking...
-Program Size: Code=10380 RO-data=1008 RW-data=216 ZI-data=5456  
+Program Size: Code=10660 RO-data=1008 RW-data=228 ZI-data=5452  
 FromELF: creating hex file...
 After Build - User command #1: make_hex_a7.bat
 V:\software\m3_for_arty_a7\Build_Keil>call fromelf --vhx --32x1 --output bram_a7.hex objects\m3_for_arty_a7.axf 
@@ -201,7 +215,7 @@ bram_a7.hex
         2 file copiati.
 V:\software\m3_for_arty_a7\Build_Keil>copy qspi_a7.hex ..\..\..\hardware\m3_for_arty_a7\testbench 
         1 file copiati.
-".\objects\m3_for_arty_a7.axf" - 0 Error(s), 52 Warning(s).
+".\objects\m3_for_arty_a7.axf" - 0 Error(s), 59 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -219,7 +233,7 @@ Package Vendor: ARM
 <h2>Collection of Component Files used:</h2>
 
    * Component: ARM::CMSIS:CORE:5.4.0
-Build Time Elapsed:  00:00:03
+Build Time Elapsed:  00:00:04
 </pre>
 </body>
 </html>

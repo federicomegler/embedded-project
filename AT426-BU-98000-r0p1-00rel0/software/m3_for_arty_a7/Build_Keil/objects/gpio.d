@@ -23,3 +23,4 @@
 .\objects\gpio.o: ..\cmsis\CMSIS\Include\core_cmInstr.h
 .\objects\gpio.o: ..\cmsis\CMSIS\Include\core_cmFunc.h
 .\objects\gpio.o: ..\cmsis\Device\Include\ARTY_CM3\system_ARTY_CM3.h
+.\objects\gpio.o: ..\cmsis\CMSIS\Include\core_cm3.h

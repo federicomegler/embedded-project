@@ -331,9 +331,10 @@ int main (void)
 
 
     // Main loop.  Handle LEDs and switches via interrupt
+		
 		while ( 1 )
     {
-			lastButton = buttonCheck(lastButton);
+			
     }
 }
 
