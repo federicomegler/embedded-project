@@ -24,6 +24,7 @@
 #include "xgpio.h"              // Xilinx GPIO routines
 #include "peripherallink.h"     // IRQ definitions
 #include <string.h>
+#include "core_cm3.h"
 
 /************************** Variable Definitions **************************/
 /*
@@ -42,6 +43,9 @@ static XGpio Gpio_DAPLink;     /* The driver instance for the DAPLink GPIO */
 char word[20] = "";
 char character[5] = "";
 int iterator=0;
+uint32_t lastButton;
+int isLong = 0;
+int begin = 0;
 
 
 /*****************************************************************************/
@@ -133,48 +137,6 @@ void GPIO0_Handler ( void )
     NVIC_ClearPendingIRQ(GPIO0_IRQn);
 }
 
-void GPIO1_Handler ( void )
-{
-
-    int mask, led_val, incr;
-    volatile uint32_t gpio_push_buttons;
-    volatile uint32_t gpio_leds_rgb;
-
-    // For LEDs, cycle around colour each time respective push button is pressed
-    // Only change if a pushbutton is pressed.
-    // This prevents a double change as the button is released.
-    if( XGpio_DiscreteRead(&Gpio_RGBLed_PB, ARTY_A7_PB_CHANNEL) != 0 )
-    {
-        // LEDs are on a 3 spacing.  So multiply button press by 2^3 to increment the correct LED
-        gpio_push_buttons = XGpio_DiscreteRead(&Gpio_RGBLed_PB, ARTY_A7_PB_CHANNEL);
-        gpio_leds_rgb     = XGpio_DiscreteRead(&Gpio_RGBLed_PB, ARTY_A7_RGB_CHANNEL);
-        if ( gpio_push_buttons & 0x1 ) {
-                mask = 0x7;
-                incr = 0x1;
-        } else if ( gpio_push_buttons & 0x2 ) {
-                mask = (0x7 << 3);
-                incr = (0x1 << 3);
-        } else if ( gpio_push_buttons & 0x4 ) {
-                mask = (0x7 << 6);
-                incr = (0x1 << 6);
-        } else if ( gpio_push_buttons & 0x8 ) {
-                mask = (0x7 << 9);
-                incr = (0x1 << 9);
-        }
-
-        led_val = gpio_leds_rgb & mask;
-        led_val = (led_val+incr) & mask;
-        gpio_leds_rgb = (gpio_leds_rgb & ~mask) | led_val;
-        
-        XGpio_DiscreteWrite(&Gpio_RGBLed_PB, ARTY_A7_RGB_CHANNEL, gpio_leds_rgb);
-    }
-
-    // Clear interrupt from GPIO
-    XGpio_InterruptClear(&Gpio_RGBLed_PB, XGPIO_IR_MASK);
-    // Clear interrupt in NVIC
-    NVIC_ClearPendingIRQ(GPIO1_IRQn);
-}
-
 /* Note : No interrupt handler for DAPLink GPIO, it does not have the IRQ line connected
           No requirement as it is only a toggle between QSPI XIP and QSPI normal controllers
           Instead, standard routine provided
@@ -184,7 +146,6 @@ void SetDAPLinkQSPIMode( u32 mode )
 {
     // Set the qspi_sel line
     XGpio_DiscreteWrite(&Gpio_DAPLink, ARTY_A7_DAPLINK_GPIO_CHANNEL, mode);
-    
 }
 
 void IncLeds( void )
@@ -196,6 +157,16 @@ void IncLeds( void )
     gpio_dip_switches = XGpio_DiscreteRead(&Gpio_Led_DIPSw, ARTY_A7_DIP_CHANNEL);   // Capture DIP status
     XGpio_DiscreteWrite(&Gpio_Led_DIPSw, ARTY_A7_LED_CHANNEL, (gpio_dip_switches+1));   // Set LEDs
     
+}
+
+void SysTick_Handler(void){        
+				isLong = 1;
+}
+
+void timer(){
+	 uint32_t status = SysTick_Config(800);
+	if(status == 1)
+		XGpio_DiscreteWrite(&Gpio_Led_DIPSw, ARTY_A7_LED_CHANNEL, 0x8);
 }
 
 void blink(int led){
@@ -220,7 +191,74 @@ void shortDelay(){
 	for(i=0; i < 20; i++);
 }
 
-uint32_t buttonCheck(uint32_t lastButton){
+void GPIO1_Handler ( void )
+{
+	if(XGpio_DiscreteRead(&Gpio_RGBLed_PB, ARTY_A7_PB_CHANNEL) == 0x4){
+			nextCharacter();	
+	}
+	else if(XGpio_DiscreteRead(&Gpio_RGBLed_PB, ARTY_A7_PB_CHANNEL) == 0x8){
+			printWord();
+	}
+	else{
+		if(begin == 1){
+			begin = 0;
+			if(isLong == 1){
+					XGpio_DiscreteWrite(&Gpio_Led_DIPSw, ARTY_A7_LED_CHANNEL, 0x02);
+					longDelay();
+					XGpio_DiscreteWrite(&Gpio_Led_DIPSw, ARTY_A7_LED_CHANNEL, 0x00);	
+					addSignal(isLong);
+			}
+			else{
+					XGpio_DiscreteWrite(&Gpio_Led_DIPSw, ARTY_A7_LED_CHANNEL, 0x01);
+					shortDelay();
+					XGpio_DiscreteWrite(&Gpio_Led_DIPSw, ARTY_A7_LED_CHANNEL, 0x00);
+					addSignal(isLong);
+			}
+		}
+		//Start counting the length of the signal only if button 1 is high
+		if(begin == 0 && XGpio_DiscreteRead(&Gpio_RGBLed_PB, ARTY_A7_PB_CHANNEL) == 0x1){
+			isLong = 0;
+			begin = 1;
+			timer();
+		}
+	}
+	
+    // Clear interrupt from GPIO
+    XGpio_InterruptClear(&Gpio_RGBLed_PB, XGPIO_IR_MASK);
+    // Clear interrupt in NVIC
+    NVIC_ClearPendingIRQ(GPIO1_IRQn);
+}
+
+//Insert the long/short signal into character[]
+void addSignal(int isLong){
+		if(isLong == 1){
+			character[iterator] = 'l';
+			++iterator;
+		}
+		else{
+			character[iterator] = 's';
+			++iterator;
+		}
+}
+
+void nextCharacter(){
+		codingMorse(character);
+		for(iterator=0; iterator<5; ++iterator){
+			character[iterator] = '\0';
+		}
+		iterator=0;
+}
+
+void printWord(){
+		codingMorse(character);
+		for(iterator=0; iterator<5; ++iterator){
+			character[iterator] = '\0';
+		}
+		iterator=0;
+		print(word);
+}
+
+uint32_t buttonCheck(int lastButton){
 	uint32_t buttonStates;
 	buttonStates = XGpio_DiscreteRead(&Gpio_RGBLed_PB, ARTY_A7_PB_CHANNEL);
 	
@@ -228,27 +266,27 @@ uint32_t buttonCheck(uint32_t lastButton){
 		switch(buttonStates)
 		{
 			case 0x01: // short signal
-					XGpio_DiscreteWrite(&Gpio_Led_DIPSw, ARTY_A7_LED_CHANNEL, 0x01);
-					shortDelay();
-					XGpio_DiscreteWrite(&Gpio_Led_DIPSw, ARTY_A7_LED_CHANNEL, 0x00);
+//					XGpio_DiscreteWrite(&Gpio_Led_DIPSw, ARTY_A7_LED_CHANNEL, 0x01);
+//					shortDelay();
+//					XGpio_DiscreteWrite(&Gpio_Led_DIPSw, ARTY_A7_LED_CHANNEL, 0x00);
 					character[iterator] = 's';
 					++iterator;
 					//print("short");
 					//mediumDelay();
 			break;
 			case 0x02: // long signal
-					XGpio_DiscreteWrite(&Gpio_Led_DIPSw, ARTY_A7_LED_CHANNEL, 0x01);
-					mediumDelay();
-					XGpio_DiscreteWrite(&Gpio_Led_DIPSw, ARTY_A7_LED_CHANNEL, 0x00);
+//					XGpio_DiscreteWrite(&Gpio_Led_DIPSw, ARTY_A7_LED_CHANNEL, 0x01);
+//					mediumDelay();
+//					XGpio_DiscreteWrite(&Gpio_Led_DIPSw, ARTY_A7_LED_CHANNEL, 0x00);
 					character[iterator] = 'l';
 					++iterator;
 				  //print("-");
 					//shortDelay();
 			break;
 			case 0x04: // letter end
-					XGpio_DiscreteWrite(&Gpio_Led_DIPSw, ARTY_A7_LED_CHANNEL, 0x04);
-					shortDelay();
-					XGpio_DiscreteWrite(&Gpio_Led_DIPSw, ARTY_A7_LED_CHANNEL, 0x00);
+//					XGpio_DiscreteWrite(&Gpio_Led_DIPSw, ARTY_A7_LED_CHANNEL, 0x04);
+//					shortDelay();
+//					XGpio_DiscreteWrite(&Gpio_Led_DIPSw, ARTY_A7_LED_CHANNEL, 0x00);
 					longDelay();
 					codingMorse(character);
 					for(iterator=0; iterator<5; ++iterator){
@@ -257,10 +295,15 @@ uint32_t buttonCheck(uint32_t lastButton){
 					iterator=0;
 			break;
 			case 0x08: // word end
-				XGpio_DiscreteWrite(&Gpio_Led_DIPSw, ARTY_A7_LED_CHANNEL, 0x08);
-				shortDelay();
-				XGpio_DiscreteWrite(&Gpio_Led_DIPSw, ARTY_A7_LED_CHANNEL, 0x00);
-				print(word);
+//				XGpio_DiscreteWrite(&Gpio_Led_DIPSw, ARTY_A7_LED_CHANNEL, 0x08);
+//				shortDelay();
+//				XGpio_DiscreteWrite(&Gpio_Led_DIPSw, ARTY_A7_LED_CHANNEL, 0x00);
+					codingMorse(character);
+					for(iterator=0; iterator<5; ++iterator){
+								character[iterator] = '\0';
+							}
+					iterator=0;
+					print(word);
 			break;
 				default:
 					shortDelay();

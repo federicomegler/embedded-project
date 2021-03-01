@@ -27,11 +27,15 @@ void blink(int led);
 uint32_t getButton();
 void disableButton(int number);
 
-uint32_t buttonCheck(uint32_t lastButton);
+uint32_t buttonCheck(int lastButton);
 void shortDelay();
 void mediumDelay();
 void longDelay();
 void codingMorse(char *b);
+void timer();
+void nextCharacter();
+void printWord();
+void addSignal(int isLong);
 // void GPIO0_Handler ( void );
 // void GPIO1_Handler ( void );
 
