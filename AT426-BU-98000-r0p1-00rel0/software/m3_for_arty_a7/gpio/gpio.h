@@ -26,16 +26,19 @@ void SetDAPLinkQSPIMode( u32 mode );
 void blink(int led);
 uint32_t getButton();
 void disableButton(int number);
+void translate_word(char* input_word, int key);
+void encodingMorse(char *b);
+void printEncodedMorse();
 
 uint32_t buttonCheck(int lastButton);
 void shortDelay();
 void mediumDelay();
 void longDelay();
-void codingMorse(char *b);
 void timer();
 void nextCharacter();
 void printWord();
 void addSignal(int isLong);
+void decodingMorse(char *b);
 // void GPIO0_Handler ( void );
 // void GPIO1_Handler ( void );
 

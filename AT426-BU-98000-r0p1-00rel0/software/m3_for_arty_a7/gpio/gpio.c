@@ -47,6 +47,7 @@ int iterator=0;
 uint32_t lastButton;
 int isLong = 0;
 int begin = 0;
+char translated_sentence[200] = "";
 
 
 /*****************************************************************************/
@@ -243,7 +244,7 @@ void addSignal(int isLong){
 }
 
 void nextCharacter(){
-		codingMorse(character);
+		decodingMorse(character);
 		for(iterator=0; iterator<5; ++iterator){
 			character[iterator] = '\0';
 		}
@@ -251,73 +252,43 @@ void nextCharacter(){
 }
 
 void printWord(){
-		codingMorse(character);
+		decodingMorse(character);
 		for(iterator=0; iterator<5; ++iterator){
 			character[iterator] = '\0';
 		}
 		iterator=0;
-		print(word);
+		translate_word(word, 3);
+		print(translated_sentence);
+		encodingMorse(translated_sentence);
+		printEncodedMorse();
 }
 
-uint32_t buttonCheck(int lastButton){
-	uint32_t buttonStates;
-	buttonStates = XGpio_DiscreteRead(&Gpio_RGBLed_PB, ARTY_A7_PB_CHANNEL);
-	
-	if(buttonStates != lastButton){
-		switch(buttonStates)
-		{
-			case 0x01: // short signal
-//					XGpio_DiscreteWrite(&Gpio_Led_DIPSw, ARTY_A7_LED_CHANNEL, 0x01);
-//					shortDelay();
-//					XGpio_DiscreteWrite(&Gpio_Led_DIPSw, ARTY_A7_LED_CHANNEL, 0x00);
-					character[iterator] = 's';
-					++iterator;
-					//print("short");
-					//mediumDelay();
-			break;
-			case 0x02: // long signal
-//					XGpio_DiscreteWrite(&Gpio_Led_DIPSw, ARTY_A7_LED_CHANNEL, 0x01);
-//					mediumDelay();
-//					XGpio_DiscreteWrite(&Gpio_Led_DIPSw, ARTY_A7_LED_CHANNEL, 0x00);
-					character[iterator] = 'l';
-					++iterator;
-				  //print("-");
-					//shortDelay();
-			break;
-			case 0x04: // letter end
-//					XGpio_DiscreteWrite(&Gpio_Led_DIPSw, ARTY_A7_LED_CHANNEL, 0x04);
-//					shortDelay();
-//					XGpio_DiscreteWrite(&Gpio_Led_DIPSw, ARTY_A7_LED_CHANNEL, 0x00);
-					longDelay();
-					decodingMorse(character);
-					for(iterator=0; iterator<5; ++iterator){
-						character[iterator] = '\0';
-					}
-					iterator=0;
-			break;
-			case 0x08: // word end
-//				XGpio_DiscreteWrite(&Gpio_Led_DIPSw, ARTY_A7_LED_CHANNEL, 0x08);
-//				shortDelay();
-//				XGpio_DiscreteWrite(&Gpio_Led_DIPSw, ARTY_A7_LED_CHANNEL, 0x00);
-					codingMorse(character);
-					for(iterator=0; iterator<5; ++iterator){
-								character[iterator] = '\0';
-							}
-					iterator=0;
-					print(word);
-			break;
-				default:
+void printEncodedMorse(){
+		char * word = "";
+		int i=0;
+		for(i=0; i<strlen(encoded_sentence); ++i){
+				if(encoded_sentence[i] == 's'){
+					XGpio_DiscreteWrite(&Gpio_Led_DIPSw, ARTY_A7_LED_CHANNEL, 0x01);
 					shortDelay();
-				break;
-			}
-	}	
-	return buttonStates; 
+					XGpio_DiscreteWrite(&Gpio_Led_DIPSw, ARTY_A7_LED_CHANNEL, 0x00);
+				}
+				else if(encoded_sentence[i] == 'l'){
+					XGpio_DiscreteWrite(&Gpio_Led_DIPSw, ARTY_A7_LED_CHANNEL, 0x01);
+					longDelay();
+					XGpio_DiscreteWrite(&Gpio_Led_DIPSw, ARTY_A7_LED_CHANNEL, 0x00);
+				}
+				else{
+					longDelay();
+					longDelay();
+				}
+		}
 }
 
 void encodingMorse(char *b){
 	int internal_iterator = 0;
+	int i=0;
 	strncpy(encoded_sentence,"",strlen(encoded_sentence)); // reset the string each time the encodingMorse function is called;
-	for(int i = 0; i < strlen(b); i++){
+	for(i = 0; i < strlen(b); i++){
 		switch(b[i]){
 			case 'a': 
 				encoded_sentence[internal_iterator] = 's';
@@ -933,4 +904,32 @@ void decodingMorse(char *b){
 	 else word[strlen(word)] = 't'; 
 	}
 	else blink(4);
+}
+
+
+void translate_word(char* input_word, int key){
+    
+    int k=0;
+    const char alphabet[36] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '0', '1', '2','3', '4', '5', '6', '7', '8', '9'};
+    
+    //printf("%d\n", strlen(translated_sentence));
+    //printf("I'm about to translate the sentence \"");
+    //printf(input_word);
+    //printf("\"\n");
+    char current_char;
+    for(k = 0; k < strlen(input_word); k++){
+        if(input_word[k]==' ')
+            current_char = ' ';
+        else{
+            //printf("%c->",input_word[k]);
+            //current_char = (char) (input_word[k]+key);
+            current_char = alphabet[((int)(strchr(alphabet, input_word[k])-alphabet)+key)%36];
+            //printf("%c\n",current_char);
+        }
+        //printf("%c",&translated_sentence[strlen(translated_sentence)-1]);
+        translated_sentence[strlen(translated_sentence)] = current_char;
+    }
+//    printf("The translated sentence is ");
+//    printf(translated_sentence);
+//    printf("\n");
 }
