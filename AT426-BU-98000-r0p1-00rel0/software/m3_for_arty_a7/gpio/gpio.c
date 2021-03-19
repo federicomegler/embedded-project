@@ -910,23 +910,14 @@ void decodingMorse(char *b){
 void translate_word(char* input_word, int key){
     
     int k=0;
-    const char alphabet[36] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '0', '1', '2','3', '4', '5', '6', '7', '8', '9'};
-    
-    //printf("%d\n", strlen(translated_sentence));
-    //printf("I'm about to translate the sentence \"");
-    //printf(input_word);
-    //printf("\"\n");
+    const char alphabet[36] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '0', '1', '2','3', '4', '5', '6', '7', '8', '9'};    
     char current_char;
     for(k = 0; k < strlen(input_word); k++){
         if(input_word[k]==' ')
             current_char = ' ';
         else{
-            //printf("%c->",input_word[k]);
-            //current_char = (char) (input_word[k]+key);
             current_char = alphabet[((int)(strchr(alphabet, input_word[k])-alphabet)+key)%36];
-            //printf("%c\n",current_char);
         }
-        //printf("%c",&translated_sentence[strlen(translated_sentence)-1]);
         translated_sentence[strlen(translated_sentence)] = current_char;
     }
 //    printf("The translated sentence is ");
